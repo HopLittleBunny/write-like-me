@@ -1,0 +1,43 @@
+{
+  "name": "write-like-me",
+  "version": "1.0.0-rc.3+codex.20260729073728",
+  "description": "Remove generic AI texture, learn an evidence-based writing pattern, and rewrite in the user's voice while preserving meaning.",
+  "author": {
+    "name": "Amit Sharma",
+    "url": "https://github.com/HopLittleBunny"
+  },
+  "homepage": "https://github.com/HopLittleBunny/write-like-me#readme",
+  "repository": "https://github.com/HopLittleBunny/write-like-me",
+  "license": "MIT",
+  "keywords": [
+    "writing",
+    "voice",
+    "editing",
+    "humanize",
+    "linguistics",
+    "semantic-preservation",
+    "ai-slop"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Write Like Me",
+    "shortDescription": "Remove AI texture. Keep and learn your voice.",
+    "longDescription": "Write Like Me uses semantic safeguards and applied linguistic evidence to audit generic AI texture, preserve the draft's real voice, build a portable English writing pattern, verify rewrite integrity, and learn only corrections the user confirms.",
+    "developerName": "Amit Sharma",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Write",
+      "Detect"
+    ],
+    "defaultPrompt": [
+      "Audit or clean the AI texture in this draft.",
+      "Learn my writing pattern from a few answers.",
+      "Make this draft sound more like me."
+    ],
+    "websiteURL": "https://github.com/HopLittleBunny/write-like-me",
+    "privacyPolicyURL": "https://github.com/HopLittleBunny/write-like-me/blob/main/PRIVACY.md",
+    "termsOfServiceURL": "https://github.com/HopLittleBunny/write-like-me/blob/main/TERMS.md",
+    "brandColor": "#6657E8"
+  }
+}

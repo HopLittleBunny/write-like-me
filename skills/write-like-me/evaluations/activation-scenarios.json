@@ -1,0 +1,55 @@
+{
+  "version": "1.0.0-rc.3+codex.20260729073728",
+  "should_trigger": [
+    {
+      "id": "clean-ai-draft",
+      "prompt": "Remove the generic AI texture from this draft without changing what I mean."
+    },
+    {
+      "id": "humanize-draft",
+      "prompt": "Can you humanize this paragraph and keep every claim and caveat?"
+    },
+    {
+      "id": "learn-writing-pattern",
+      "prompt": "Learn my writing pattern from these five samples."
+    },
+    {
+      "id": "voice-answers",
+      "prompt": "I have no samples. Can you learn how I write from a few spoken answers?"
+    },
+    {
+      "id": "match-existing-file",
+      "prompt": "Use MY_WRITING_PATTERN.md to make this new draft sound more like me."
+    },
+    {
+      "id": "clean-and-learn",
+      "prompt": "Clean this draft now and help me build a reusable voice file."
+    },
+    {
+      "id": "learn-confirmed-correction",
+      "prompt": "I edited your version. Learn this correction in my writing pattern."
+    },
+    {
+      "id": "audit-without-rewrite",
+      "prompt": "Audit this draft for generic AI patterns, quote what you find, and do not rewrite it."
+    }
+  ],
+  "should_not_trigger": [
+    {
+      "id": "summarize-report",
+      "prompt": "Summarize this quarterly report in five bullets."
+    },
+    {
+      "id": "translate-spanish",
+      "prompt": "Translate this English paragraph into Spanish."
+    },
+    {
+      "id": "debug-python",
+      "prompt": "Find the bug in this Python function."
+    },
+    {
+      "id": "write-generic-copy",
+      "prompt": "Write a product description for this coffee mug."
+    }
+  ]
+}
