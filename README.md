@@ -2,6 +2,10 @@
 
 **Remove generic AI texture. Keep your meaning. Learn what actually sounds like you.**
 
+**Website:** [hoplittlebunny.github.io/write-like-me](https://hoplittlebunny.github.io/write-like-me/)
+
+**Quick start:** [Try it in two minutes](https://hoplittlebunny.github.io/write-like-me/test/#quick-start)
+
 Write Like Me is an open-source AI writing skill that combines semantic safeguards with applied linguistic evidence. It can clean or audit a one-off draft, learn a portable writing pattern from genuine samples or a few natural answers, rewrite new material in that pattern, and learn only the corrections the user explicitly confirms.
 
 It is not a banned-word list, a voice-cloning claim, an authorship detector, or an AI-detector bypass.

@@ -39,6 +39,13 @@ Do not provide confidential or highly sensitive writing unless the selected AI h
 
 Using an AI host or visiting the GitHub repository can create ordinary service, security, and analytics logs under those providers' policies. The repository contains no third-party tracking code.
 
+The public project website includes an optional anonymous feedback form. It
+stores only the platform and tests selected, bounded evaluation answers, the
+user's written feedback, consent, the release version, and a creation
+timestamp. It does not request a name, email address, IP address or raw writing
+sample. The form is hosted separately from the skill package and is not used
+for account memory, advertising or model training by Write Like Me.
+
 ## Changes and questions
 
 Material changes will be recorded in the repository history and reflected by a new effective date. For privacy questions, open an issue at [github.com/HopLittleBunny/write-like-me/issues](https://github.com/HopLittleBunny/write-like-me/issues) without including private writing samples.
