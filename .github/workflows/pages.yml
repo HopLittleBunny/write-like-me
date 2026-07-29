@@ -4,6 +4,13 @@ on:
   push:
     branches: [main]
     paths:
+      - ".codex-plugin/**"
+      - "ACKNOWLEDGEMENTS.md"
+      - "LICENSE"
+      - "PRIVACY.md"
+      - "README.md"
+      - "TERMS.md"
+      - "skills/write-like-me/**"
       - "website/**"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
