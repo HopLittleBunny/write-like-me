@@ -230,7 +230,7 @@ Render a compact 300 to 550 word file at every confidence level. Confidence chan
 - Strong: at least 10 verified independent samples and at least 3,000 verified human-authored or substantially human-edited words in the supported context.
 
 The label describes evidence sufficiency, not a probability that text is the author.
-Each feature keeps its own Preferred, Observed, Tentative, Unknown, or Rejected state. Overall confidence never turns an unsupported punctuation, paragraph, opening, or ending rule into an observed one.
+Each feature keeps its own Preferred, Observed, Tentative, Unknown, or Rejected state. Nothing becomes Observed below the Emerging floor unless the user explicitly confirms it as Preferred. Overall confidence never turns an unsupported punctuation, paragraph, opening, or ending rule into an observed one.
 
 ## Semantic release check
 
@@ -247,4 +247,4 @@ Compare source and rewrite before returning:
 
 Any critical mismatch blocks release. Repair it before style scoring.
 
-When files are available, `scripts/verify_rewrite.py` must check exact values, URLs, emails, quotations, modality, polarity, required entities, autobiographical additions, and distinctive phrase leakage from style samples. Passing this verifier does not replace the manual thesis and causal-logic review.
+When files are available, `scripts/verify_rewrite.py` must check exact values, URLs, emails, quotations, modality classes, conservative named-entity candidates, autobiographical additions, and distinctive phrase leakage from style samples. A polarity-marker count change is a named-sentence warning for manual review, not an automatic blocker. Passing this verifier does not replace the manual thesis and causal-logic review.

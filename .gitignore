@@ -7,6 +7,8 @@ __pycache__/
 dist/
 release/
 *.zip
+website/public/downloads/BUILD-MANIFEST.json
+website/public/downloads/SHA256SUMS.txt
 
 # Personal writing artefacts are private by default.
 MY_WRITING_PATTERN.md

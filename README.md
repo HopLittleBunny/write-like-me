@@ -28,7 +28,7 @@ That separation is the core product.
 - **Draft cleaning:** removes generic framing, hollow abstraction, mechanical symmetry, fake profundity, and other weak patterns while preserving strong human sentences.
 - **Writing-pattern learning:** measures supported tendencies from genuine writing, typed answers, or dictation and records evidence quality instead of pretending certainty.
 - **Voice-aware rewriting:** transfers rhythm, stance, explanation order, paragraphing, and reliable surface habits without copying old topics, anecdotes, names, or distinctive phrases.
-- **Semantic verification:** checks important values, dates, URLs, email addresses, quotes, polarity, modality, entities, autobiographical claims, and sample leakage.
+- **Semantic verification:** blocks changes to exact values, URLs, email addresses, quotations and modality classes; protects conservative named-entity candidates; flags obvious added autobiography and sample leakage; and raises sentence-level polarity warnings for manual review.
 - **Correction learning:** turns a user edit into the smallest contextual rule, asks for confirmation, and stores it in a portable Markdown profile.
 - **Private continuity:** keeps the reusable state in `MY_WRITING_PATTERN.md`, under the user's control, with no Write Like Me server or silent account memory.
 
@@ -115,7 +115,7 @@ Read the full [Privacy Policy](PRIVACY.md) and [Terms of Use](TERMS.md).
 
 ## Validation status
 
-The repository includes deterministic unit tests, activation fixtures, adversarial input cases, end-to-end scenario contracts, and a blind-beta harness. Automated checks cover evidence handling, Unicode text, dictated input, duplicate samples, prompt-injection boundaries, package contents, correction persistence, and rewrite verification.
+The repository includes deterministic unit tests, balanced activation-contract fixtures, adversarial input cases, a human-recorded scenario-evaluation harness, and a blind-beta harness. CI does not invoke a host model. Automated checks cover evidence handling, Unicode text, dictated input, duplicate samples, prompt-injection boundaries, package contents, correction persistence, and bounded rewrite verification.
 
 Passing automated checks does not prove that every host model will produce a preferred voice match. Human preference on unseen topics remains the final acceptance test.
 

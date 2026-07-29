@@ -1,5 +1,21 @@
 # Write Like Me changelog
 
+## 1.0.0-rc.4
+
+This release candidate incorporates independent end-to-end review of the documented onboarding and rewrite-verification paths.
+
+- Fixed onboarding so answers typed or dictated in the current conversation retain confirmed user authorship instead of producing an empty portable profile.
+- Made the friendly report and portable profile agree when provenance is unknown.
+- Surfaced prompt-injection risk flags in the report and portable evidence summary.
+- Prevented `Observed` feature claims below the `Emerging` evidence floor.
+- Normalised contractions and compared modality classes, allowing faithful changes such as `cannot` to `can't` and `might` to `may`.
+- Demoted polarity-marker count changes to named-sentence warnings that require manual review instead of blocking faithful paraphrases.
+- Expanded obvious invented-experience detection and protected conservative single-token named entities.
+- Replaced every documented `python` command with `python3`.
+- Centralised long-dash authority and confidence thresholds to reduce policy drift.
+- Corrected validation language to distinguish deterministic CI from human-recorded model scenarios.
+- Expanded the automated suite from 50 to 56 tests.
+
 ## 1.0.0-rc.3
 
 This release candidate makes the project ready for transparent public review.

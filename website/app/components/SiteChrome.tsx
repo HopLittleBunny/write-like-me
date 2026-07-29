@@ -83,7 +83,7 @@ export function SiteFooter() {
         <p className="footer-note">
           Open source · MIT licensed
           <br />
-          v1.0.0-rc.3 · English
+          v1.0.0-rc.4 · English
         </p>
       </div>
     </footer>

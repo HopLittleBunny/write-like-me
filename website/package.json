@@ -1,12 +1,13 @@
 {
   "name": "write-like-me-website",
-  "version": "1.0.0-rc.3",
+  "version": "1.0.0-rc.4",
   "private": true,
   "engines": {
     "node": ">=22.13.0"
   },
   "scripts": {
     "dev": "next dev",
+    "prebuild": "python3 ../skills/write-like-me/scripts/build_packages.py --output-dir public/downloads --runtime-only",
     "build": "next build --webpack",
     "lint": "eslint .",
     "test": "npm run lint && npm run build && node --test tests/static-export.test.mjs"

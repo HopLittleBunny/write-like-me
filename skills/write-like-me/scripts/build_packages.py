@@ -15,10 +15,21 @@ RUNTIME_SCRIPTS = {
     "update_writing_pattern.py",
     "verify_rewrite.py",
 }
+EXCLUDED_DIRECTORIES = {
+    ".git",
+    ".next",
+    ".wrangler",
+    "__pycache__",
+    "dist",
+    "node_modules",
+    "out",
+}
 
 
 def included(path: Path, *, package: str) -> bool:
-    if ".git" in path.parts or "__pycache__" in path.parts or path.suffix in {".pyc", ".pyo"}:
+    if any(part in EXCLUDED_DIRECTORIES for part in path.parts):
+        return False
+    if path.suffix in {".pyc", ".pyo", ".zip"}:
         return False
     if path.name == ".DS_Store":
         return False
@@ -105,7 +116,7 @@ def validate_archive(path: Path, *, package: str) -> None:
         raise ValueError("Source archive is missing the evaluation and test suite.")
 
 
-def build(output_dir: Path) -> dict[str, dict[str, str]]:
+def build(output_dir: Path, *, include_source: bool = True) -> dict[str, dict[str, str]]:
     script_path = Path(__file__).resolve()
     skill_root = script_path.parents[1]
     plugin_root = script_path.parents[3]
@@ -115,14 +126,16 @@ def build(output_dir: Path) -> dict[str, dict[str, str]]:
     artifacts = {
         "claude": output_dir / f"write-like-me-claude-skill-{version}.zip",
         "openai": output_dir / f"write-like-me-openai-plugin-{version}.zip",
-        "source": output_dir / f"write-like-me-source-evaluation-{version}.zip",
     }
+    if include_source:
+        artifacts["source"] = output_dir / f"write-like-me-source-evaluation-{version}.zip"
     write_zip(skill_root, artifacts["claude"], package="claude")
     write_zip(plugin_root, artifacts["openai"], package="openai")
-    write_zip(plugin_root, artifacts["source"], package="source")
     validate_archive(artifacts["claude"], package="claude")
     validate_archive(artifacts["openai"], package="openai")
-    validate_archive(artifacts["source"], package="source")
+    if include_source:
+        write_zip(plugin_root, artifacts["source"], package="source")
+        validate_archive(artifacts["source"], package="source")
 
     return {
         name: {"path": str(path), "sha256": sha256(path)}
@@ -130,11 +143,29 @@ def build(output_dir: Path) -> dict[str, dict[str, str]]:
     }
 
 
+def public_manifest(result: dict[str, dict[str, str]]) -> dict[str, dict[str, str]]:
+    return {
+        name: {
+            "file": Path(details["path"]).name,
+            "sha256": details["sha256"],
+        }
+        for name, details in result.items()
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output-dir", required=True, help="Directory for built ZIP files and checksums.")
+    parser.add_argument(
+        "--runtime-only",
+        action="store_true",
+        help="Build only the Claude and OpenAI runtime packages.",
+    )
     args = parser.parse_args()
-    result = build(Path(args.output_dir).expanduser().resolve())
+    result = build(
+        Path(args.output_dir).expanduser().resolve(),
+        include_source=not args.runtime_only,
+    )
     output_dir = Path(args.output_dir).expanduser().resolve()
     checksum_lines = [
         f"{details['sha256']}  {Path(details['path']).name}"
@@ -145,7 +176,7 @@ def main() -> None:
         encoding="utf-8",
     )
     (output_dir / "BUILD-MANIFEST.json").write_text(
-        json.dumps(result, indent=2, sort_keys=True) + "\n",
+        json.dumps(public_manifest(result), indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
     )
     for name, details in result.items():

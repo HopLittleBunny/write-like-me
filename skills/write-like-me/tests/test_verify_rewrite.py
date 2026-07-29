@@ -37,6 +37,61 @@ class VerifyRewriteTests(unittest.TestCase):
         self.assertIn("unsupported_biography", codes)
         self.assertIn("style_sample_leakage", codes)
 
+    def test_contractions_and_equivalent_modal_classes_pass(self):
+        cases = (
+            ("We cannot ship on Friday.", "We can't ship on Friday."),
+            (
+                "This might work, but we should not assume it.",
+                "This may work, but we ought to avoid assuming it.",
+            ),
+        )
+        for source, candidate in cases:
+            with self.subTest(source=source):
+                result = MODULE.verify(source, candidate)
+                self.assertTrue(result["passed"])
+                self.assertNotIn(
+                    "modality_drift",
+                    {issue["code"] for issue in result["issues"]},
+                )
+
+    def test_polarity_marker_movement_warns_without_blocking(self):
+        result = MODULE.verify("It was not a small job.", "It was a big job.")
+        self.assertTrue(result["passed"])
+        self.assertEqual(result["critical_issue_count"], 0)
+        self.assertEqual(result["warning_count"], 1)
+        issue = result["issues"][0]
+        self.assertEqual(issue["code"], "polarity_drift")
+        self.assertEqual(issue["severity"], "warning")
+        self.assertEqual(issue["expected"]["source_sentences"], ["It was not a small job."])
+        self.assertEqual(issue["actual"]["candidate_sentences"], [])
+
+    def test_participial_personal_history_blocks_release(self):
+        source = "We reviewed the numbers before release."
+        candidate = (
+            "Having run three launches at my last company, "
+            "I reviewed the numbers before release."
+        )
+        result = MODULE.verify(source, candidate)
+        self.assertFalse(result["passed"])
+        issue = next(
+            issue for issue in result["issues"]
+            if issue["code"] == "unsupported_biography"
+        )
+        self.assertIn("Having run", issue["actual"])
+        self.assertIn("at my last company", issue["actual"])
+
+    def test_single_token_name_is_protected(self):
+        result = MODULE.verify(
+            "Priya owns the rollback drill.",
+            "The rollback drill has an owner.",
+        )
+        self.assertFalse(result["passed"])
+        issue = next(
+            issue for issue in result["issues"]
+            if issue["code"] == "entity_omission"
+        )
+        self.assertIn("Priya", issue["expected"])
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -13,7 +13,7 @@ Use this for first-run and multi-step interactions.
 - Treat rough, spoken, and imperfect answers as useful evidence.
 - Give the user their draft or file before any optional follow-up.
 - Say plainly that personal writing-pattern analysis currently supports English. Do not turn this into a technical warning wall.
-- Avoid em dashes and en dashes by default. Preserve them when the user explicitly prefers them, repeated reliable evidence marks them Observed, or exact source preservation requires one.
+- Follow the canonical long-dash authority order in [output contracts](output-contracts.md).
 
 ## First-run routes
 

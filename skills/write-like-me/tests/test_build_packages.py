@@ -49,7 +49,22 @@ class BuildPackagesTests(unittest.TestCase):
             self.assertIn("write-like-me/skills/write-like-me/scripts/run_blind_beta.py", source_names)
             self.assertIn("write-like-me/skills/write-like-me/tests/test_build_packages.py", source_names)
             self.assertFalse(any("/.git/" in name for name in source_names))
+            self.assertFalse(any("/node_modules/" in name for name in source_names))
+            self.assertFalse(any(name.endswith(".zip") for name in source_names))
             self.assertNotIn("write-like-me/SOCIAL-LAUNCH.md", source_names)
+            manifest = MODULE.public_manifest(result)
+            self.assertEqual(
+                manifest["claude"]["file"],
+                claude.name,
+            )
+            self.assertNotIn("/", manifest["claude"]["file"])
+
+    def test_runtime_only_build_works_inside_the_repository(self):
+        output_dir = SKILL_ROOT.parents[1] / "website" / "public" / "downloads"
+        result = MODULE.build(output_dir, include_source=False)
+        self.assertEqual(set(result), {"claude", "openai"})
+        self.assertTrue(Path(result["claude"]["path"]).is_file())
+        self.assertTrue(Path(result["openai"]["path"]).is_file())
 
 
 if __name__ == "__main__":

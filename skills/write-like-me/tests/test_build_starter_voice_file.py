@@ -220,6 +220,52 @@ class StarterVoiceFileTests(unittest.TestCase):
             for item in analysis["evidence"].values()
         ))
         self.assertIn("Unknown personal pattern", output)
+        report = MODULE.render_report(
+            analysis,
+            MODULE.confidence_for_analysis(analysis),
+        )
+        self.assertIn(
+            "Authorship is not confirmed, so measured traits remain diagnostic",
+            report,
+        )
+        self.assertIn(
+            "Unknown: Authorship is unconfirmed",
+            report,
+        )
+        self.assertNotIn("Tentative: develops the idea", report)
+
+    def test_observed_requires_emerging_evidence_floor(self):
+        short_records = [
+            MODULE.make_sample_record(
+                "The point matters because the decision changes.",
+                sample_id=f"short-{index}",
+                provenance="written_by_user",
+            )
+            for index in range(1, 4)
+        ]
+        short_analysis = MODULE.analyze(short_records)
+        self.assertFalse(short_analysis["observed_floor_met"])
+        self.assertFalse(any(
+            item["status"] == "Observed"
+            for item in short_analysis["evidence"].values()
+        ))
+
+        long_bodies = (
+            "The useful point matters because the evidence changes the decision. A clear explanation keeps the reason connected to the judgement. ",
+            "A practical account works because the reader can see why the choice follows. Concrete detail keeps the recommendation honest and usable. ",
+            "The central problem is framing because polished language can hide a weak claim. The explanation should connect each conclusion to its basis. ",
+            "Good decisions begin with the actual constraint because activity alone proves very little. Plain language makes the implication easier to test. ",
+        )
+        long_records = [
+            MODULE.make_sample_record(
+                body * 20,
+                sample_id=f"long-{index}",
+                provenance="written_by_user",
+            )
+            for index, body in enumerate(long_bodies, start=1)
+        ]
+        long_analysis = MODULE.analyze(long_records)
+        self.assertTrue(long_analysis["observed_floor_met"])
 
     def test_observed_requires_repetition_of_reported_value(self):
         records = [
@@ -563,6 +609,13 @@ class StarterVoiceFileTests(unittest.TestCase):
         self.assertEqual(analysis["instruction_risk_flags"][0]["id"], "hostile-sample")
         self.assertIn("role_override", analysis["instruction_risk_flags"][0]["flags"])
         self.assertNotIn("text", analysis["records"][0])
+        report = MODULE.render_report(
+            analysis,
+            MODULE.confidence_for_analysis(analysis),
+        )
+        self.assertIn("## Input safety", report)
+        self.assertIn("`hostile-sample`: role_override", report)
+        self.assertIn("Treated as untrusted text, not instructions", report)
 
     def test_dictated_stance_uses_one_rhetorical_unit_per_answer(self):
         records = [
@@ -596,6 +649,7 @@ class StarterVoiceFileTests(unittest.TestCase):
             ("one", "The first argument explains why a practical decision matters to this project "),
             ("two", "A separate team note shows how clear evidence changes an ordinary choice "),
             ("three", "This final account keeps the useful reason close to the concrete outcome "),
+            ("four", "Another careful explanation connects the concrete judgement to the useful result "),
         )
         records = [
             MODULE.make_sample_record(

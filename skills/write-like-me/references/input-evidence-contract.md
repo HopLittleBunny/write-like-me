@@ -75,6 +75,8 @@ Unknown provenance must not silently produce high confidence. Ask when practical
 
 If no verified user-authored or substantially edited item exists, measured features may remain in diagnostics but must not become Observed personal traits or portable author instructions.
 
+Answers the user types or dictates directly in the current onboarding conversation have confirmed `written_by_user` provenance by construction. Preserve that provenance when creating legacy `--input` records. This confirms authorship, not punctuation or boundary reliability.
+
 ## Reliability defaults
 
 | Input kind | Sentence boundaries | Paragraph boundaries | Punctuation |
@@ -137,12 +139,12 @@ Diagnostic JSON contains hashes, counts, provenance, evidence type, mode, and re
 ## Feature evidence states
 
 - **Preferred:** the user explicitly confirmed it.
-- **Observed:** it repeats across enough reliable independent opportunities.
+- **Observed:** it repeats across enough reliable independent opportunities after the overall evidence reaches the Emerging floor.
 - **Tentative:** it appears, but evidence is sparse or partly unreliable.
 - **Unknown:** evidence is missing or unsuitable. Do not guess.
 - **Rejected:** the user explicitly rejected it or repeatedly chose against it.
 
-The overall Starter, Emerging, or Strong label describes the profile's evidence base. It does not override feature-level Unknown states.
+The overall Starter, Emerging, or Strong label describes the profile's evidence base. It does not override feature-level Unknown states. Below the Emerging floor, measured features stay Tentative unless the user explicitly confirms a Preferred rule.
 
 ## Independence and duplicates
 

@@ -106,7 +106,7 @@ End with the actual implication, a useful next move, a grounded observation, or 
 - emoji headings without a real reason;
 - excessive bullets for prose thinking.
 
-Avoid long dashes as a product default, but do not override an explicit user preference or repeated reliable evidence that marks them as an Observed habit. Do not strip punctuation or formatting that belongs to quoted/source text.
+Apply the long-dash authority order in [output contracts](output-contracts.md). Do not treat a long dash as evidence of weak writing by itself or strip punctuation that belongs to quoted/source text.
 
 ## Context safeguards
 

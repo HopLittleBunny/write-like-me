@@ -7,7 +7,7 @@ activate the skill. The package test suite checks that these cases remain balanc
 unique, and aligned with the skill description:
 
 ```bash
-python scripts/run_tests.py
+python3 scripts/run_tests.py
 ```
 
 Activation behavior still needs a fresh-conversation smoke test on each target
@@ -16,7 +16,7 @@ platform because routing is controlled by the host, not by this repository.
 Validate the scenario contract:
 
 ```bash
-python scripts/evaluate_scenarios.py
+python3 scripts/evaluate_scenarios.py
 ```
 
 For an OpenAI or Claude run, start a fresh conversation with the packaged skill enabled. Run every scenario and record a JSON response:
@@ -44,7 +44,7 @@ For an OpenAI or Claude run, start a fresh conversation with the packaged skill 
 Then grade it:
 
 ```bash
-python scripts/evaluate_scenarios.py \
+python3 scripts/evaluate_scenarios.py \
   --responses evaluations/openai-responses.json \
   --result evaluations/openai-results.json
 ```
@@ -71,7 +71,7 @@ Use `evaluations/beta/README.md` for the 10 to 20 person private beta. It includ
 Run the harness with:
 
 ```bash
-python scripts/run_blind_beta.py --help
+python3 scripts/run_blind_beta.py --help
 ```
 
 ## Package boundary

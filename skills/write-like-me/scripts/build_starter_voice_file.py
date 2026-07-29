@@ -1572,6 +1572,20 @@ def analyze(
             scope=scope,
         ),
     }
+    if primary_mode:
+        observed_sample_count = int(verified_modes.get(primary_mode, 0))
+        observed_word_count = int(verified_mode_word_counts.get(primary_mode, 0))
+    else:
+        observed_sample_count = analysis["verified_sample_count"]
+        observed_word_count = analysis["verified_word_count"]
+    analysis["observed_floor_met"] = (
+        observed_sample_count >= 4
+        and observed_word_count >= 800
+    )
+    if not analysis["observed_floor_met"]:
+        for item in analysis["evidence"].values():
+            if item["status"] == "Observed":
+                item["status"] = "Tentative"
     return analysis
 
 
@@ -1733,50 +1747,96 @@ def limitation(analysis: dict) -> str:
 
 def render_report(analysis: dict, confidence_result: tuple[str, str]) -> str:
     level, reason = confidence_result
-    sentence_status = feature_status(analysis, "sentence_rhythm")
-    paragraph_status = feature_status(analysis, "paragraph_rhythm")
+    trusted_measurement = (
+        analysis["verified_sample_count"] > 0
+        and analysis.get("language_status") == "supported"
+    )
+
+    def report_status(feature: str) -> str:
+        return feature_status(analysis, feature) if trusted_measurement else "Unknown"
+
+    sentence_status = report_status("sentence_rhythm")
+    paragraph_status = report_status("paragraph_rhythm")
+    sentence_description = (
+        describe_sentence_rhythm(analysis)
+        if trusted_measurement
+        else "Unknown until authorship is confirmed."
+    )
+    paragraph_description = (
+        describe_paragraph_rhythm(analysis)
+        if trusted_measurement
+        else "Unknown until authorship is confirmed."
+    )
     keeps = list(analysis["explicit_keep"])
-    if not keeps and sentence_status != "Unknown":
+    if not keeps and trusted_measurement and sentence_status != "Unknown":
         keeps.append(describe_sentence_rhythm(analysis).split(". The measured", 1)[0] + ".")
-    if not keeps and paragraph_status != "Unknown":
+    if not keeps and trusted_measurement and paragraph_status != "Unknown":
         keeps.append(describe_paragraph_rhythm(analysis).split(". The measured", 1)[0] + ".")
     if not keeps:
-        keeps.append("Keep the supported idea movement without forcing unsupported surface habits.")
+        keeps.append(
+            "Authorship is unconfirmed, so stay close to the current wording until verified evidence is supplied."
+            if not trusted_measurement
+            else "Keep the supported idea movement without forcing unsupported surface habits."
+        )
     personal_avoid = [*analysis["explicit_avoid"], *analysis.get("anti_style_rules", [])]
     avoid_lines = [f"- Personal: {item}" for item in personal_avoid]
     if not avoid_lines:
         avoid_lines.append("- Personal: no explicit anti-style preference supplied yet.")
     avoid_lines.append(f"- Global hygiene: {dash_hygiene_line(analysis)}")
-    connection_summary = " ".join(analysis.get("connection_behaviours", [])) or "No repeated connection behaviour is reliable yet."
+    connection_summary = (
+        " ".join(analysis.get("connection_behaviours", []))
+        if trusted_measurement
+        else ""
+    ) or "No repeated connection behaviour is reliable yet."
     if sentence_status == "Unknown":
         noticed_rhythm = "Reliable sentence rhythm is still unknown because the supplied source does not preserve trustworthy sentence boundaries."
     else:
         noticed_rhythm = "The sentence rhythm is " + describe_sentence_rhythm(analysis).split(". The measured", 1)[0].replace("Use ", "").replace("Prefer ", "").replace("Allow ", "").lower() + "."
+    risk_flags = analysis.get("instruction_risk_flags", [])
+    if risk_flags:
+        risk_lines = "\n".join(
+            f"- `{item['id']}`: {', '.join(item['flags'])}. Treated as untrusted text, not instructions."
+            for item in risk_flags
+        )
+    else:
+        risk_lines = "- No instruction-like sample content was detected."
+    noticed = (
+        "Authorship is not confirmed, so measured traits remain diagnostic and no personal pattern is asserted."
+        if not trusted_measurement
+        else f"Your strongest current signal is how the ideas move: it {format_top(analysis['discourse_profile'])}. {noticed_rhythm}"
+    )
+    keep_label = "Preferred" if analysis["explicit_keep"] else (
+        "Tentative" if trusted_measurement else "Unknown"
+    )
     return f"""# Writing Pattern Report
 
 Write Like Me currently analyses English writing. Surface-style evidence is withheld when its source is unreliable.
 
 ## What I noticed
 
-Your strongest current signal is how the ideas move: it {format_top(analysis['discourse_profile'])}. {noticed_rhythm}
+{noticed}
 
 ## Your writing pattern
 
 - How you tend to begin: {describe_openings(analysis)}
-- How your ideas move: {feature_status(analysis, 'discourse')}: {format_top(analysis['discourse_profile'])}
-- Sentence rhythm: {sentence_status}: {describe_sentence_rhythm(analysis)}
-- Paragraph rhythm: {paragraph_status}: {describe_paragraph_rhythm(analysis)}
-- How you make a point: {feature_status(analysis, 'stance')}: {format_top(analysis['stance_profile'])}
-- How you connect ideas: {feature_status(analysis, 'connections')}: {connection_summary}
-- Register: {feature_status(analysis, 'register')}: {describe_register(analysis)}
+- How your ideas move: {report_status('discourse')}: {format_top(analysis['discourse_profile']) if trusted_measurement else 'Unknown until authorship is confirmed'}
+- Sentence rhythm: {sentence_status}: {sentence_description}
+- Paragraph rhythm: {paragraph_status}: {paragraph_description}
+- How you make a point: {report_status('stance')}: {format_top(analysis['stance_profile']) if trusted_measurement else 'Unknown until authorship is confirmed'}
+- How you connect ideas: {report_status('connections')}: {connection_summary}
+- Register: {report_status('register')}: {describe_register(analysis) if trusted_measurement else 'Unknown until authorship is confirmed'}
 
 ## What to keep
 
-{chr(10).join(f'- {"Preferred" if analysis["explicit_keep"] else "Tentative"}: {item}' for item in keeps)}
+{chr(10).join(f'- {keep_label}: {item}' for item in keeps)}
 
 ## What to avoid
 
 {chr(10).join(avoid_lines)}
+
+## Input safety
+
+{risk_lines}
 
 ## Confidence
 
@@ -1871,6 +1931,7 @@ Use this for English writing in my voice. Start from my current draft, facts, pu
 - Unique eligible items: {analysis['sample_count']}
 - Approximate unique words: {analysis['word_count']}
 - Verified user-authored or substantially edited items: {analysis['verified_sample_count']}
+- Instruction-like sample content ignored: {len(analysis.get('instruction_risk_flags', []))} item(s)
 - Context: {mode}
 - Limitation: {reason}{dictation_note}{duplicate_note}{anti_note}
 

@@ -75,9 +75,9 @@ Before a rewrite, the system identifies:
 - caveats, limits, uncertainty, and source attribution;
 - audience, relationship, format, and length constraints.
 
-The model performs the contextual meaning review. `verify_rewrite.py` then checks machine-detectable invariants. A critical verifier issue blocks a candidate.
+The model performs the contextual meaning review. `verify_rewrite.py` then checks machine-detectable invariants. A critical verifier issue blocks a candidate; a polarity-marker warning names sentences for manual review.
 
-This verifier is intentionally conservative and incomplete. It can detect a missing price or changed negation; it cannot prove total semantic equivalence.
+This verifier is intentionally conservative and incomplete. It can detect a missing price, changed modality class, conservative entity omission, or obvious autobiographical addition. It cannot prove total semantic equivalence.
 
 ## 6. Contextual texture model
 
@@ -91,17 +91,13 @@ Audit mode must quote evidence and recommend the minimum effective fix. It canno
 
 The personal profile uses feature-level reliability:
 
-- **Observed:** repeated and sufficiently reliable evidence.
+- **Observed:** repeated and sufficiently reliable evidence after the profile reaches the Emerging evidence floor.
 - **Preferred:** an explicit user preference.
 - **Tentative:** a weak or early signal.
 - **Rejected:** an explicitly rejected pattern with bounded context.
 - **Unknown:** insufficient or unsuitable evidence.
 
-The overall evidence label is separate:
-
-- **Starter:** two to three short answers, fewer than four independent samples, or fewer than 800 words.
-- **Emerging:** at least four independent samples and at least 800 words.
-- **Strong:** at least ten verified independent samples and at least 3,000 verified human-authored or substantially human-edited words in the supported context.
+The overall evidence label is separate. The canonical Starter, Emerging, and Strong thresholds live in [`output-contracts.md`](../skills/write-like-me/references/output-contracts.md#confidence-assignment).
 
 The overall label never upgrades every individual feature. For example, dictated answers may support directness and explanation order while punctuation and deliberate sentence boundaries remain unknown.
 
@@ -123,12 +119,11 @@ This design prevents “more voice” from automatically outranking accuracy.
 `verify_rewrite.py` checks bounded risks including:
 
 - missing or altered values, dates, currencies, URLs, email addresses, and quotations;
-- polarity and negation changes;
-- changed modality;
-- required entity loss;
-- unsupported autobiographical language;
+- sentence-level polarity-marker changes as non-blocking manual-review warnings;
+- changed modality classes after contraction normalisation;
+- conservative single-token and multi-token named-entity loss;
+- obvious unsupported autobiographical language, including participial experience frames;
 - distinctive phrase leakage from style samples;
-- selected generic texture diagnostics.
 
 Diagnostics store hashes and counts rather than raw draft text by default. An explicit flag is required to include source text.
 

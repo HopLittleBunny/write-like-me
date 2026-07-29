@@ -2,9 +2,11 @@
 """Block a Write Like Me rewrite when deterministic integrity checks fail.
 
 This verifier is deliberately narrow. It catches exact-value drift, changed
-modality or negation, unsupported autobiographical claims, and phrase leakage
-from style samples. It does not claim to prove full semantic equivalence, so a
-language-model meaning review remains required.
+modality classes, likely named-entity omissions, obvious unsupported
+autobiographical claims, and phrase leakage from style samples. Polarity-marker
+movement is a warning for named-sentence review, not a release blocker. The
+verifier does not prove full semantic equivalence, so a language-model meaning
+review remains required.
 """
 
 from __future__ import annotations
@@ -40,22 +42,59 @@ AUTOBIOGRAPHY_PATTERNS = (
     re.compile(r"\bI (?:remember|met|worked with|spoke to|talked to|saw|felt|experienced|witnessed|learned)\b", re.I),
     re.compile(r"\bmy (?:client|customer|team|colleague|friend|family|partner|manager|employee|experience|story)\b", re.I),
     re.compile(r"\bwhen I was\b|\bin my (?:career|job|life|childhood|experience)\b", re.I),
+    re.compile(
+        r"\b(?:having|after|before)\s+(?:personally\s+)?"
+        r"(?:run|ran|led|managed|built|founded|launched|shipped|worked|served|joined|left|delivered)\b",
+        re.I,
+    ),
+    re.compile(
+        r"\bat my (?:last|former|previous|current|first) "
+        r"(?:company|job|employer|workplace|startup|agency|firm|organisation|organization)\b",
+        re.I,
+    ),
+    re.compile(
+        r"\bI (?:have|had) (?:personally )?"
+        r"(?:run|led|managed|built|founded|launched|shipped|worked|served|delivered)\b",
+        re.I,
+    ),
 )
-MODAL_PATTERNS = (
-    ("may", re.compile(r"\bmay\b", re.I)),
-    ("might", re.compile(r"\bmight\b", re.I)),
-    ("could", re.compile(r"\bcould\b", re.I)),
-    ("should", re.compile(r"\bshould\b", re.I)),
-    ("must", re.compile(r"\bmust\b", re.I)),
-    ("can", re.compile(r"\bcan\b", re.I)),
-    ("would", re.compile(r"\bwould\b", re.I)),
-    ("will", re.compile(r"\bwill\b", re.I)),
+CONTRACTION_EXPANSIONS = {
+    "can't": "can not",
+    "cannot": "can not",
+    "couldn't": "could not",
+    "didn't": "did not",
+    "doesn't": "does not",
+    "don't": "do not",
+    "hadn't": "had not",
+    "hasn't": "has not",
+    "haven't": "have not",
+    "isn't": "is not",
+    "mightn't": "might not",
+    "mustn't": "must not",
+    "shouldn't": "should not",
+    "wasn't": "was not",
+    "weren't": "were not",
+    "won't": "will not",
+    "wouldn't": "would not",
+}
+MODAL_CLASS_PATTERNS = (
+    ("possibility", re.compile(r"\b(?:may|might|could)\b")),
+    ("recommendation", re.compile(r"\b(?:should|ought\s+to)\b")),
+    (
+        "requirement",
+        re.compile(r"\b(?:must|have\s+to|has\s+to|had\s+to|need\s+to|needs\s+to|needed\s+to)\b"),
+    ),
+    ("capability", re.compile(r"\b(?:can|able\s+to)\b")),
+    ("commitment", re.compile(r"\b(?:will|going\s+to)\b")),
+    ("conditional", re.compile(r"\bwould\b")),
 )
-NEGATION_RE = re.compile(
-    r"\b(?:not|never|no|neither|nor|cannot|can't|won't|isn't|aren't|wasn't|"
-    r"weren't|don't|doesn't|didn't|shouldn't|wouldn't|couldn't|mustn't)\b",
-    re.I,
+NEGATION_RE = re.compile(r"\b(?:not|never|no|neither|nor)\b")
+NEGATIVE_CONCEPT_RE = re.compile(
+    r"\b(?:avoid|avoids|avoided|avoiding|deny|denies|denied|exclude|excludes|excluded|"
+    r"fail|fails|failed|lack|lacks|lacked|prevent|prevents|prevented|refuse|refuses|"
+    r"refused|reject|rejects|rejected|stop|stops|stopped|without)\b"
 )
+SENTENCE_BOUNDARY_RE = re.compile(r"(?<=[.!?])\s+|\n+")
 COMMON_CAPITALIZED = {
     "A", "An", "And", "As", "At", "But", "For", "From", "He", "Her", "His",
     "How", "I", "If", "In", "It", "Its", "My", "No", "Not", "On", "Or",
@@ -77,6 +116,13 @@ def normalize(text: str) -> str:
     return unicodedata.normalize("NFKC", text).translate(
         str.maketrans({"’": "'", "‘": "'", "ʼ": "'", "＇": "'"})
     )
+
+
+def normalize_semantics(text: str) -> str:
+    normalized = normalize(text).casefold()
+    for contraction, expansion in CONTRACTION_EXPANSIONS.items():
+        normalized = re.sub(rf"\b{re.escape(contraction)}\b", expansion, normalized)
+    return normalized
 
 
 def read_text(path: str) -> str:
@@ -103,12 +149,22 @@ def quoted_strings(text: str) -> Counter[str]:
 
 
 def modal_signature(text: str) -> dict[str, int]:
-    normalized = normalize(text)
-    return {name: len(pattern.findall(normalized)) for name, pattern in MODAL_PATTERNS}
+    normalized = normalize_semantics(text)
+    return {name: len(pattern.findall(normalized)) for name, pattern in MODAL_CLASS_PATTERNS}
 
 
-def negation_count(text: str) -> int:
-    return len(NEGATION_RE.findall(normalize(text)))
+def polarity_sentences(text: str) -> list[str]:
+    sentences = [
+        re.sub(r"\s+", " ", sentence).strip()
+        for sentence in SENTENCE_BOUNDARY_RE.split(normalize(text))
+        if sentence.strip()
+    ]
+    return [
+        sentence
+        for sentence in sentences
+        if NEGATION_RE.search(normalize_semantics(sentence))
+        or NEGATIVE_CONCEPT_RE.search(normalize_semantics(sentence))
+    ]
 
 
 def named_entity_candidates(text: str) -> set[str]:
@@ -117,6 +173,11 @@ def named_entity_candidates(text: str) -> set[str]:
     entities.update(
         match.group(0)
         for match in re.finditer(r"\b[A-Z][\w'-]+(?:[ \t]+[A-Z][\w'-]+)+\b", normalized)
+        if match.group(0) not in COMMON_CAPITALIZED
+    )
+    entities.update(
+        match.group(0)
+        for match in re.finditer(r"\b[A-Z][\w'-]{2,}\b", normalized)
         if match.group(0) not in COMMON_CAPITALIZED
     )
     return entities
@@ -144,10 +205,11 @@ def add_issue(
     code: str,
     message: str,
     *,
+    severity: str = "critical",
     expected: Any = None,
     actual: Any = None,
 ) -> None:
-    item: dict[str, Any] = {"severity": "critical", "code": code, "message": message}
+    item: dict[str, Any] = {"severity": severity, "code": code, "message": message}
     if expected is not None:
         item["expected"] = expected
     if actual is not None:
@@ -188,10 +250,17 @@ def verify(
     if source_modals != candidate_modals:
         add_issue(issues, "modality_drift", "Words that control certainty or obligation changed.", expected=source_modals, actual=candidate_modals)
 
-    source_negations = negation_count(source)
-    candidate_negations = negation_count(candidate)
-    if source_negations != candidate_negations:
-        add_issue(issues, "polarity_drift", "The number of explicit negations changed.", expected=source_negations, actual=candidate_negations)
+    source_negative_sentences = polarity_sentences(source)
+    candidate_negative_sentences = polarity_sentences(candidate)
+    if len(source_negative_sentences) != len(candidate_negative_sentences):
+        add_issue(
+            issues,
+            "polarity_drift",
+            "Polarity markers moved. Review the named source and candidate sentences manually.",
+            severity="warning",
+            expected={"source_sentences": source_negative_sentences},
+            actual={"candidate_sentences": candidate_negative_sentences},
+        )
 
     required = set(required_entities) | named_entity_candidates(source)
     missing_entities = sorted(entity for entity in required if entity and entity not in candidate)
@@ -223,10 +292,13 @@ def verify(
             actual=sorted(leaked_phrases)[:10],
         )
 
+    critical_issues = [issue for issue in issues if issue["severity"] == "critical"]
+    warning_issues = [issue for issue in issues if issue["severity"] == "warning"]
     return {
-        "schema_version": "1.0",
-        "passed": not issues,
-        "critical_issue_count": len(issues),
+        "schema_version": "1.1",
+        "passed": not critical_issues,
+        "critical_issue_count": len(critical_issues),
+        "warning_count": len(warning_issues),
         "issues": issues,
         "checks": {
             "exact_values": True,
@@ -234,7 +306,7 @@ def verify(
             "emails": True,
             "quotes": True,
             "modality": True,
-            "polarity": True,
+            "polarity_sentence_warning": True,
             "named_entities": True,
             "autobiographical_additions": True,
             "style_sample_phrase_leakage": True,

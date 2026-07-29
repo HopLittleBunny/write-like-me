@@ -1,6 +1,6 @@
 {
   "name": "write-like-me",
-  "version": "1.0.0-rc.3+codex.20260729073728",
+  "version": "1.0.0-rc.4+codex.20260729151118",
   "description": "Remove generic AI texture, learn an evidence-based writing pattern, and rewrite in the user's voice while preserving meaning.",
   "author": {
     "name": "Amit Sharma",

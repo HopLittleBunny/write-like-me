@@ -52,7 +52,7 @@ Do not let the person who generated the outputs coach the writer during blind ju
 Copy `beta-cases.example.json` to a private working file and replace the placeholder outputs.
 
 ```bash
-python scripts/run_blind_beta.py prepare \
+python3 scripts/run_blind_beta.py prepare \
   --cases evaluations/beta/beta-cases.json \
   --pack evaluations/beta/blinded-review-pack.json \
   --key evaluations/beta/private-answer-key.json
@@ -93,7 +93,7 @@ For comprehension, ask the person to explain `Starter` and `Unknown` in their ow
 ## Score the batch
 
 ```bash
-python scripts/run_blind_beta.py score \
+python3 scripts/run_blind_beta.py score \
   --key evaluations/beta/private-answer-key.json \
   --ballots evaluations/beta/trial-ballots.csv \
   --participants evaluations/beta/participant-outcomes.csv \

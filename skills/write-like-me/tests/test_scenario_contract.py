@@ -17,7 +17,7 @@ class ScenarioContractTests(unittest.TestCase):
         payload = json.loads((SKILL_ROOT / "evaluations" / "scenarios.json").read_text(encoding="utf-8"))
         self.assertRegex(
             payload["version"],
-            r"^1\.0\.0-rc\.3\+codex\.[0-9]{14}$",
+            r"^1\.0\.0-rc\.4\+codex\.[0-9]{14}$",
         )
         self.assertEqual(MODULE.validate_scenarios(payload), [])
         self.assertGreaterEqual(len(payload["scenarios"]), 8)
