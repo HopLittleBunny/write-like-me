@@ -25,11 +25,16 @@ class BuildPackagesTests(unittest.TestCase):
             self.assertTrue(source.exists())
             with zipfile.ZipFile(claude) as archive:
                 claude_names = set(archive.namelist())
+                claude_entries = archive.infolist()
             with zipfile.ZipFile(openai) as archive:
                 openai_names = set(archive.namelist())
             with zipfile.ZipFile(source) as archive:
                 source_names = set(archive.namelist())
             self.assertIn("write-like-me/SKILL.md", claude_names)
+            self.assertTrue(all(
+                entry.date_time == MODULE.FIXED_ZIP_TIMESTAMP
+                for entry in claude_entries
+            ))
             self.assertNotIn("write-like-me/agents/openai.yaml", claude_names)
             self.assertNotIn("write-like-me/evaluations/beta/README.md", claude_names)
             self.assertIn("write-like-me/.codex-plugin/plugin.json", openai_names)
@@ -58,6 +63,16 @@ class BuildPackagesTests(unittest.TestCase):
                 claude.name,
             )
             self.assertNotIn("/", manifest["claude"]["file"])
+            with tempfile.TemporaryDirectory() as second_directory:
+                second = MODULE.build(Path(second_directory))
+            self.assertEqual(
+                result["claude"]["sha256"],
+                second["claude"]["sha256"],
+            )
+            self.assertEqual(
+                result["openai"]["sha256"],
+                second["openai"]["sha256"],
+            )
 
     def test_runtime_only_build_works_inside_the_repository(self):
         output_dir = SKILL_ROOT.parents[1] / "website" / "public" / "downloads"

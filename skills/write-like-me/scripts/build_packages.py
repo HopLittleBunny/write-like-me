@@ -24,6 +24,7 @@ EXCLUDED_DIRECTORIES = {
     "node_modules",
     "out",
 }
+FIXED_ZIP_TIMESTAMP = (2026, 1, 1, 0, 0, 0)
 
 
 def included(path: Path, *, package: str) -> bool:
@@ -73,7 +74,12 @@ def write_zip(source: Path, target: Path, *, package: str) -> None:
                 continue
             relative = path.relative_to(source)
             if included(relative, package=package):
-                archive.write(path, Path(root_name) / relative)
+                archive_path = (Path(root_name) / relative).as_posix()
+                info = zipfile.ZipInfo(archive_path, date_time=FIXED_ZIP_TIMESTAMP)
+                info.compress_type = zipfile.ZIP_DEFLATED
+                permissions = 0o755 if path.stat().st_mode & 0o111 else 0o644
+                info.external_attr = permissions << 16
+                archive.writestr(info, path.read_bytes())
 
 
 def sha256(path: Path) -> str:

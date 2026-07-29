@@ -14,6 +14,7 @@ This release candidate incorporates independent end-to-end review of the documen
 - Replaced every documented `python` command with `python3`.
 - Centralised long-dash authority and confidence thresholds to reduce policy drift.
 - Corrected validation language to distinguish deterministic CI from human-recorded model scenarios.
+- Made release ZIP metadata deterministic so local and CI checksums match.
 - Expanded the automated suite from 50 to 56 tests.
 
 ## 1.0.0-rc.3
