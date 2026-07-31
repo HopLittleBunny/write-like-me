@@ -108,6 +108,15 @@ End with the actual implication, a useful next move, a grounded observation, or 
 
 Apply the long-dash authority order in [output contracts](output-contracts.md). Do not treat a long dash as evidence of weak writing by itself or strip punctuation that belongs to quoted/source text.
 
+### Answer-wrapper leakage
+
+- `Here is a more human version`;
+- `I have matched your voice below`;
+- routine explanations of what was changed when the user asked only for paste-ready prose;
+- generic offers to revise, shorten, or adjust the writing after the requested piece.
+
+Keep process commentary outside the requested writing and omit it by default. Retain a note only when the user requests explanation or an unresolved semantic, factual, or evidence limitation genuinely needs attention.
+
 ## Context safeguards
 
 - Do not rewrite quoted text, code, cited examples, or deliberate demonstrations of bad writing unless asked.

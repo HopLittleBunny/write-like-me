@@ -1,4 +1,4 @@
-# Write Like Me
+# Write Like Me by HopLittleBunny
 
 **Remove generic AI texture. Keep your meaning. Learn what actually sounds like you.**
 
@@ -28,6 +28,8 @@ That separation is the core product.
 - **Draft cleaning:** removes generic framing, hollow abstraction, mechanical symmetry, fake profundity, and other weak patterns while preserving strong human sentences.
 - **Writing-pattern learning:** measures supported tendencies from genuine writing, typed answers, or dictation and records evidence quality instead of pretending certainty.
 - **Voice-aware rewriting:** transfers rhythm, stance, explanation order, paragraphing, and reliable surface habits without copying old topics, anecdotes, names, or distinctive phrases.
+- **Language-variety protection:** preserves evidenced regional English, dialect and code-switching without manufacturing identity-based mannerisms.
+- **Paste-ready output:** returns the requested prose without routine “here is the human version” wrappers or adjustment offers.
 - **Semantic verification:** blocks changes to exact values, URLs, email addresses, quotations and modality classes; protects conservative named-entity candidates; flags obvious added autobiography and sample leakage; and raises sentence-level polarity warnings for manual review.
 - **Correction learning:** turns a user edit into the smallest contextual rule, asks for confirmation, and stores it in a portable Markdown profile.
 - **Private continuity:** keeps the reusable state in `MY_WRITING_PATTERN.md`, under the user's control, with no Write Like Me server or silent account memory.
@@ -106,6 +108,16 @@ Upload the Claude Skill ZIP from the latest release. The portable skill contains
 ### From source
 
 Clone the repository and use `skills/write-like-me` as the skill directory. No server, database, account, API key, or third-party Python package is required.
+
+### Local agent installer
+
+The npm package uses a distinct scoped name because the unscoped `write-like-me` package belongs to another project. After the scoped package is published, install it with:
+
+```bash
+npx @hoplittlebunny/write-like-me
+```
+
+The installer detects supported local agents, offers explicit `--agent` and `--all` targeting, supports `--dry-run`, and records checksums plus timestamped backups for safe uninstall or restore. It never stores raw writing samples. Run `npx @hoplittlebunny/write-like-me --help` for the complete command list.
 
 ## Privacy
 

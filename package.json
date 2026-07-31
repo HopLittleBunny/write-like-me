@@ -1,0 +1,49 @@
+{
+  "name": "@hoplittlebunny/write-like-me",
+  "version": "1.0.0-rc.6",
+  "description": "Install Write Like Me by HopLittleBunny for supported local AI agents.",
+  "license": "MIT",
+  "author": "Amit Sharma",
+  "homepage": "https://hoplittlebunny.github.io/write-like-me/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HopLittleBunny/write-like-me.git"
+  },
+  "type": "commonjs",
+  "bin": {
+    "write-like-me": "bin/install.js"
+  },
+  "files": [
+    "bin/install.js",
+    "skills/write-like-me/SKILL.md",
+    "skills/write-like-me/agents/openai.yaml",
+    "skills/write-like-me/references/",
+    "skills/write-like-me/scripts/build_starter_voice_file.py",
+    "skills/write-like-me/scripts/update_writing_pattern.py",
+    "skills/write-like-me/scripts/verify_rewrite.py",
+    "LICENSE",
+    "PRIVACY.md",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node --test tests/installer.test.js && python3 skills/write-like-me/scripts/run_tests.py",
+    "test:installer": "node --test tests/installer.test.js",
+    "test:skill": "python3 skills/write-like-me/scripts/run_tests.py",
+    "pack:check": "npm pack --dry-run"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "agent-skill",
+    "ai-writing",
+    "claude",
+    "codex",
+    "cursor",
+    "gemini",
+    "writing-style"
+  ]
+}

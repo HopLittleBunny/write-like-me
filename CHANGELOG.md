@@ -1,5 +1,26 @@
 # Write Like Me changelog
 
+## 1.0.0-rc.6
+
+This release candidate improves first-use writing quality and prepares safe local-agent distribution.
+
+- Expanded implicit activation to personal emails, replies, bios, social posts, essays, and other prose that goes out under the user's name.
+- Made ordinary drafting and rewriting paste-ready by default, without routine answer wrappers or revision offers.
+- Added an evidence-backed language-variety contract that preserves supported dialect, regional English, and code-switching without manufacturing identity-based mannerisms.
+- Added a scoped cross-agent npm installer for Claude Code, Codex, Cursor, and Gemini CLI.
+- Added dry-run, explicit targeting, safe uninstall, timestamped backups, restore support, modified-file protection, path validation, and installer regression tests.
+- Kept raw writing samples out of installer state and retained `MY_WRITING_PATTERN.md` as the user-controlled continuity artifact.
+- Qualified the public brand as Write Like Me by HopLittleBunny and linked the plugin manifest to the GitHub Pages site.
+
+## 1.0.0-rc.5
+
+This release candidate aligns the OpenAI plugin package with the live directory uploader contract.
+
+- Added explicit `interface.composerIcon` and `interface.logo` manifest fields.
+- Packaged both required square 512×512 PNG assets under `.codex-plugin/assets/`.
+- Added archive validation that fails when either asset or manifest reference is missing.
+- Added package-contract tests for PNG validity, square dimensions, minimum size, and exact manifest paths.
+
 ## 1.0.0-rc.4
 
 This release candidate incorporates independent end-to-end review of the documented onboarding and rewrite-verification paths.

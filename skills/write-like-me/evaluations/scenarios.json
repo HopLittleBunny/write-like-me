@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0-rc.4+codex.20260729151118",
+  "version": "1.0.0-rc.6+codex.20260731100340",
   "scenarios": [
     {
       "id": "clean-draft-no-samples",
@@ -150,6 +150,48 @@
         "required_output_tokens": ["useful", "—", "incomplete"],
         "forbidden_output_tokens": [],
         "forbid_long_dash": false
+      }
+    },
+    {
+      "id": "preserve-evidenced-indian-english",
+      "request": "Make this email clearer but keep the Indian English that sounds like me.",
+      "inputs": {
+        "draft": "Please revert by Friday itself so we can prepone the review if needed.",
+        "keep": ["Use revert for reply", "Keep itself for emphasis", "Use prepone when it is the precise word"]
+      },
+      "must": ["preserve explicitly supported regional usage", "keep the request and deadline", "return paste-ready prose"],
+      "must_not": ["standardise every regional expression", "add unobserved Indian English", "turn dialect into a mannerism"],
+      "deterministic": {
+        "required_output_tokens": ["revert", "Friday itself", "prepone"],
+        "forbidden_output_tokens": ["do the needful", "good name", "Here is a clearer version"],
+        "forbid_long_dash": true
+      }
+    },
+    {
+      "id": "do-not-perform-australian-dialect",
+      "request": "Write a short professional email in my voice. I use Australian spelling, but do not add slang.",
+      "inputs": {
+        "brief": "Ask the team to organise the final review for Tuesday.",
+        "keep": ["Use Australian spelling"]
+      },
+      "must": ["use the explicit spelling preference", "respect professional register", "return paste-ready prose"],
+      "must_not": ["insert stereotypical slang", "claim a broad Australian identity", "add unsupported social familiarity"],
+      "deterministic": {
+        "required_output_tokens": ["organise", "Tuesday"],
+        "forbidden_output_tokens": ["mate", "arvo", "no worries", "Here is the email"],
+        "forbid_long_dash": true
+      }
+    },
+    {
+      "id": "paste-ready-personal-reply",
+      "request": "Reply to the recruiter for me. Say I am interested but cannot speak until Friday.",
+      "inputs": {},
+      "must": ["write the requested reply", "preserve interest and availability", "return paste-ready prose"],
+      "must_not": ["announce the rewrite", "describe the skill", "add a routine revision offer"],
+      "deterministic": {
+        "required_output_tokens": ["interested", "Friday"],
+        "forbidden_output_tokens": ["Here is", "I matched your voice", "let me know if you want", "I hope this helps"],
+        "forbid_long_dash": true
       }
     },
     {

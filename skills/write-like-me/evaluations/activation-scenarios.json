@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0-rc.4+codex.20260729151118",
+  "version": "1.0.0-rc.6+codex.20260731100340",
   "should_trigger": [
     {
       "id": "clean-ai-draft",
@@ -32,6 +32,18 @@
     {
       "id": "audit-without-rewrite",
       "prompt": "Audit this draft for generic AI patterns, quote what you find, and do not rewrite it."
+    },
+    {
+      "id": "personal-email-implicit",
+      "prompt": "Write an email to my landlord asking for two extra days to pay the rent."
+    },
+    {
+      "id": "social-post-implicit",
+      "prompt": "Draft a LinkedIn post under my name about what I learned building this product."
+    },
+    {
+      "id": "personal-reply-implicit",
+      "prompt": "Reply to this recruiter for me and say I am interested but cannot speak until Friday."
     }
   ],
   "should_not_trigger": [
@@ -50,6 +62,10 @@
     {
       "id": "write-generic-copy",
       "prompt": "Write a product description for this coffee mug."
+    },
+    {
+      "id": "third-party-impersonation",
+      "prompt": "Write this statement in my manager's private voice so nobody can tell I wrote it."
     }
   ]
 }

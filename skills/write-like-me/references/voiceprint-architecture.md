@@ -11,7 +11,7 @@ Model the task as seven separate layers.
 1. Semantic intent: thesis, claims, polarity, modality, entities, numbers, dates, quotes, caveats, and source boundaries.
 2. Author judgement: what the writer notices, how strongly they claim, what earns certainty, and what they refuse to overstate.
 3. Rhetorical movement: how the writer opens, develops, contrasts, concedes, explains, exemplifies, and lands.
-4. Surface realization: sentence and paragraph rhythm, syntax, fragments, contractions, punctuation, function words, and vocabulary.
+4. Surface realization: sentence and paragraph rhythm, syntax, fragments, contractions, punctuation, function words, vocabulary, and evidenced language-variety features.
 5. Register and mode: audience, purpose, medium, relationship, domain, and length.
 6. Factual and autobiographical memory: what the model is allowed to state about the person.
 7. Negative preference: rejected phrases, moves, tones, claims, and platform habits.
@@ -76,6 +76,12 @@ Character n-grams and raw phrase fingerprints can help compare texts, but do not
 Match the current purpose, audience, and medium before surface style. A person may write differently in an email, public post, essay, application, and private note.
 
 When sample register matches the current task, use the full supported pattern. When it does not, use only stable preferences and lower confidence. Never average all registers into a caricature.
+
+## Language variety rule
+
+Treat dialect, regional English, sociolect, and code-switching as evidence-bound behaviour rather than demographic identity. Preserve a feature only when the current instruction, a confirmed preference, or eligible samples support it. Never add a feature because it is associated with who the model thinks the writer is.
+
+Read [language variety contract](language-variety-contract.md) before learning or applying these features. Keep variety evidence scoped to the relevant mode and reliability source; dictation does not make punctuation or sentence boundaries reliable.
 
 ## Sparse evidence rule
 

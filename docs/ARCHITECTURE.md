@@ -7,7 +7,7 @@ Write Like Me aims to improve specificity and personal fit without moving the us
 The system therefore treats writing as two related but separate layers:
 
 - **semantic content:** thesis, claims, polarity, entities, values, dates, quotations, caveats, modality, uncertainty, and source boundaries;
-- **expression behaviour:** discourse order, stance, directness, cadence, syntax, paragraphing, vocabulary level, punctuation habits, and contextual register.
+- **expression behaviour:** discourse order, stance, directness, cadence, syntax, paragraphing, vocabulary level, punctuation habits, contextual register, and evidenced language-variety features.
 
 A rewrite may change the second layer only while the first remains locked, unless the user explicitly authorises a substantive edit.
 
@@ -24,6 +24,7 @@ Plugin manifest
     │   ├── conversation-contract.md
     │   ├── input-evidence-contract.md
     │   ├── voiceprint-architecture.md
+    │   ├── language-variety-contract.md
     │   ├── ai-texture-catalogue.md
     │   ├── output-contracts.md
     │   └── question-bank.md
@@ -41,7 +42,7 @@ The router selects one of five workflows:
 
 1. **Clean or audit:** work from the current draft without asking for personal samples.
 2. **Learn a pattern:** build a portable profile from eligible evidence.
-3. **Write like me:** combine a new source draft with an existing profile or genuine samples.
+3. **Write like me:** draft or rewrite personal prose from a brief, source draft, existing profile, or genuine samples.
 4. **Clean and learn:** provide immediate value, then collect evidence.
 5. **Learn from correction:** propose and persist one user-confirmed contextual rule.
 
@@ -85,7 +86,7 @@ The texture catalogue names recurring weak patterns but does not use a universal
 
 A pattern matters only when it creates a cost in context: vagueness, false authority, lost information, repetitive rhythm, unsupported significance, or distance from the intended reader.
 
-Audit mode must quote evidence and recommend the minimum effective fix. It cannot score “humanness,” guess whether AI wrote the text, or rewrite without permission.
+Audit mode must quote evidence and recommend the minimum effective fix. It cannot score “humanness,” guess whether AI wrote the text, or rewrite without permission. Drafting and rewriting modes return paste-ready prose by default and omit routine answer-wrapper commentary.
 
 ## 7. Evidence-aware personal pattern
 
@@ -102,6 +103,8 @@ The overall evidence label is separate. The canonical Starter, Emerging, and Str
 The overall label never upgrades every individual feature. For example, dictated answers may support directness and explanation order while punctuation and deliberate sentence boundaries remain unknown.
 
 The current implementation supports English personal-pattern analysis. Draft cleaning can still be useful outside English, but the system must not present English-specific measurements as validated cross-linguistic evidence.
+
+Within English, regional variety, dialect, sociolect, and code-switching remain evidence-bound features. The system preserves them when supported by the current instruction, confirmed preferences, or eligible samples. It never inserts identity-associated features merely to perform a dialect.
 
 ## 8. Candidate generation and selection
 

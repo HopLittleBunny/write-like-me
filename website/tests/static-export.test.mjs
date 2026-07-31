@@ -19,13 +19,13 @@ test("exports the homepage, tester guide and both release packages", async () =>
   await Promise.all([
     access(
       new URL(
-        "../out/downloads/write-like-me-claude-skill-1.0.0-rc.4+codex.20260729151118.zip",
+        "../out/downloads/write-like-me-claude-skill-1.0.0-rc.6+codex.20260731100340.zip",
         import.meta.url,
       ),
     ),
     access(
       new URL(
-        "../out/downloads/write-like-me-openai-plugin-1.0.0-rc.4+codex.20260729151118.zip",
+        "../out/downloads/write-like-me-openai-plugin-1.0.0-rc.6+codex.20260731100340.zip",
         import.meta.url,
       ),
     ),
@@ -45,4 +45,10 @@ test("points the static feedback form at the existing anonymous backend", async 
   assert.match(form, /feedbackEndpoint/);
   assert.match(paths, /NEXT_PUBLIC_FEEDBACK_ENDPOINT/);
   assert.doesNotMatch(form, /name="email"|name="name"/);
+});
+
+test("uses the public GitHub Pages identity rather than the retired beta host", async () => {
+  const homepage = await readFile(new URL("../out/index.html", import.meta.url), "utf8");
+  assert.match(homepage, /Write Like Me by HopLittleBunny/);
+  assert.doesNotMatch(homepage, /write-like-me-beta\.amitt7274\.chatgpt\.site/);
 });

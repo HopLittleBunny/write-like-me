@@ -43,6 +43,8 @@ def included(path: Path, *, package: str) -> bool:
     if package == "openai":
         if path.parts == (".codex-plugin", "plugin.json"):
             return True
+        if path.parts[:2] == (".codex-plugin", "assets"):
+            return True
         if path.parts in {
             ("ACKNOWLEDGEMENTS.md",),
             ("LICENSE",),
@@ -97,6 +99,8 @@ def validate_archive(path: Path, *, package: str) -> None:
         required = {"write-like-me/SKILL.md"}
     else:
         required = {
+            "write-like-me/.codex-plugin/assets/composer-icon.png",
+            "write-like-me/.codex-plugin/assets/logo.png",
             "write-like-me/.codex-plugin/plugin.json",
             "write-like-me/ACKNOWLEDGEMENTS.md",
             "write-like-me/LICENSE",
@@ -108,6 +112,21 @@ def validate_archive(path: Path, *, package: str) -> None:
     missing = required - names
     if missing:
         raise ValueError(f"Archive {path.name} is missing: {', '.join(sorted(missing))}")
+    if package == "openai":
+        with zipfile.ZipFile(path) as archive:
+            manifest = json.loads(
+                archive.read("write-like-me/.codex-plugin/plugin.json").decode("utf-8")
+            )
+        interface = manifest.get("interface", {})
+        expected_assets = {
+            "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+            "logo": "./.codex-plugin/assets/logo.png",
+        }
+        for field, expected_path in expected_assets.items():
+            if interface.get(field) != expected_path:
+                raise ValueError(
+                    f"OpenAI manifest {field} must reference {expected_path}."
+                )
     if any("__pycache__" in name or name.endswith(".pyc") for name in names):
         raise ValueError(f"Archive {path.name} contains Python cache files.")
     if package == "claude" and any(name.startswith("write-like-me/agents/") for name in names):

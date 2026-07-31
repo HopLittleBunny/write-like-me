@@ -32,6 +32,8 @@ For non-English writing:
 
 The deterministic builder must gate language before analysis. Proceed for supported English. For uncertain or materially mixed text, withhold measured English-style claims and use only explicit preferences. For unsupported text, stop personal-pattern generation and offer draft cleaning.
 
+English support does not mean standardising every writer to one English variety. Apply [language variety contract](language-variety-contract.md): preserve supported regional and community usage, but do not infer or manufacture dialect from identity.
+
 ## Input kinds
 
 ### `human_writing_sample`
