@@ -6,7 +6,9 @@ Long-dash handling follows this authority order: explicit current instruction, c
 
 Return the finished writing first.
 
-Then add a compact note:
+Return only the finished writing by default. Do not add a heading such as `Rewritten version`, narrate that the voice was matched, or end with a routine offer to make changes.
+
+Add a compact note only when the user asks for an explanation, the rewrite materially reorganises the source, or an unresolved semantic or evidence issue needs attention:
 
 ```text
 What changed
@@ -97,6 +99,7 @@ Write Like Me currently analyses English writing. Do not assume these measuremen
 4. Follow my current instruction before this profile.
 5. Match purpose, audience, and medium before surface style.
 6. When evidence is thin or conflicting, stay closer to my current wording.
+7. Preserve my evidenced English variety and code-switching without adding stereotypical dialect features I have not used.
 
 ## Evidence and confidence
 
@@ -152,6 +155,11 @@ Evidence labels:
 
 - [Safe connective or vocabulary tendency]
 - Do not force recurring words when they do not fit the current meaning.
+
+### Language variety
+
+- [Preferred, Observed, Tentative, or Unknown regional usage, spelling, code-switching, or dialect feature]
+- Preserve supported features without adding identity-based mannerisms.
 
 ## Context and register
 

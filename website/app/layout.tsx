@@ -5,13 +5,13 @@ import "./globals.css";
 
 const publicSiteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
-  "https://write-like-me-beta.amitt7274.chatgpt.site";
+  "https://hoplittlebunny.github.io/write-like-me";
 const socialImageUrl = `${publicSiteUrl.replace(/\/$/, "")}/og-write-like-me.png`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(publicSiteUrl),
   title: {
-    default: "Write Like Me — Open-source AI writing skill",
+    default: "Write Like Me by HopLittleBunny — Open-source AI writing skill",
     template: "%s | Write Like Me",
   },
   description:
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     shortcut: withBasePath("/favicon.svg"),
   },
   openGraph: {
-    title: "Write Like Me — Open-source AI writing skill",
+    title: "Write Like Me by HopLittleBunny — Open-source AI writing skill",
     description:
       "Lock your meaning. Remove AI slop. Write more like yourself.",
     type: "website",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Write Like Me — Open-source AI writing skill",
+    title: "Write Like Me by HopLittleBunny — Open-source AI writing skill",
     description:
       "Lock your meaning. Remove AI slop. Write more like yourself.",
     images: [socialImageUrl],

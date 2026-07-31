@@ -3,10 +3,10 @@ import { SiteFooter, SiteHeader } from "./components/SiteChrome";
 import { withBasePath } from "./lib/paths";
 
 const claudeDownload = withBasePath(
-  "/downloads/write-like-me-claude-skill-1.0.0-rc.4+codex.20260729151118.zip",
+  "/downloads/write-like-me-claude-skill-1.0.0-rc.6+codex.20260731100340.zip",
 );
 const openaiDownload = withBasePath(
-  "/downloads/write-like-me-openai-plugin-1.0.0-rc.4+codex.20260729151118.zip",
+  "/downloads/write-like-me-openai-plugin-1.0.0-rc.6+codex.20260731100340.zip",
 );
 const VIDEO_URL =
   "https://videos.pexels.com/video-files/6798789/6798789-hd_1920_1080_24fps.mp4";
@@ -34,7 +34,7 @@ export default function Home() {
             <div className="hero-copy">
               <div className="eyebrow">
                 <span className="status-dot" />
-                Open source · MIT licensed
+                By HopLittleBunny · Open source · MIT licensed
               </div>
               <h1>
                 AI can write.
@@ -227,7 +227,7 @@ export default function Home() {
                 <a className="button button-dark" href={claudeDownload} download>
                   Download Claude Skill <span aria-hidden="true">↓</span>
                 </a>
-                <small>ZIP · v1.0.0-rc.4</small>
+                <small>ZIP · v1.0.0-rc.6</small>
               </article>
               <article className="download-card">
                 <div className="platform-mark openai-mark">O</div>
@@ -242,7 +242,7 @@ export default function Home() {
                 <a className="button button-outline" href={claudeDownload} download>
                   Download Agent Skill <span aria-hidden="true">↓</span>
                 </a>
-                <small>ZIP · v1.0.0-rc.4</small>
+                <small>ZIP · v1.0.0-rc.6</small>
               </article>
               <article className="download-card">
                 <div className="platform-mark codex-mark">X</div>
@@ -257,7 +257,7 @@ export default function Home() {
                 <a className="button button-outline" href={openaiDownload} download>
                   Download OpenAI Plugin <span aria-hidden="true">↓</span>
                 </a>
-                <small>ZIP · v1.0.0-rc.4</small>
+                <small>ZIP · v1.0.0-rc.6</small>
               </article>
             </div>
             <div className="guide-callout">

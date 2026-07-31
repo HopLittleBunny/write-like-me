@@ -17,10 +17,21 @@ class ScenarioContractTests(unittest.TestCase):
         payload = json.loads((SKILL_ROOT / "evaluations" / "scenarios.json").read_text(encoding="utf-8"))
         self.assertRegex(
             payload["version"],
-            r"^1\.0\.0-rc\.4\+codex\.[0-9]{14}$",
+            r"^1\.0\.0-rc\.6\+codex\.[0-9]{14}$",
         )
         self.assertEqual(MODULE.validate_scenarios(payload), [])
-        self.assertGreaterEqual(len(payload["scenarios"]), 8)
+        self.assertGreaterEqual(len(payload["scenarios"]), 15)
+
+    def test_language_variety_and_paste_ready_scenarios_are_present(self):
+        payload = json.loads((SKILL_ROOT / "evaluations" / "scenarios.json").read_text(encoding="utf-8"))
+        scenario_ids = {scenario["id"] for scenario in payload["scenarios"]}
+        self.assertTrue(
+            {
+                "preserve-evidenced-indian-english",
+                "do-not-perform-australian-dialect",
+                "paste-ready-personal-reply",
+            }.issubset(scenario_ids)
+        )
 
     def test_critical_checks_cannot_be_averaged_away(self):
         scenario = {

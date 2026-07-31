@@ -22,11 +22,18 @@ class ActivationContractTests(unittest.TestCase):
     def test_description_covers_core_trigger_language_without_becoming_generic(self):
         skill_text = (SKILL_ROOT / "SKILL.md").read_text(encoding="utf-8")
         frontmatter = skill_text.split("---", 2)[1].lower()
-        for phrase in ("humanize drafts", "generic ai texture", "sound more like the user", "reusable writing-pattern file"):
+        for phrase in ("write, rewrite, or reply", "user's voice", "emails", "social posts", "generic ai texture", "evidence-based writing pattern"):
             self.assertIn(phrase, frontmatter)
         self.assertNotIn("summarize", frontmatter)
         self.assertNotIn("translate", frontmatter)
         self.assertNotIn("debug", frontmatter)
+
+    def test_implicit_personal_prose_and_third_party_boundary(self):
+        payload = json.loads(SCENARIOS.read_text(encoding="utf-8"))
+        positive_ids = {item["id"] for item in payload["should_trigger"]}
+        negative_ids = {item["id"] for item in payload["should_not_trigger"]}
+        self.assertTrue({"personal-email-implicit", "social-post-implicit", "personal-reply-implicit"}.issubset(positive_ids))
+        self.assertIn("third-party-impersonation", negative_ids)
 
 
 if __name__ == "__main__":

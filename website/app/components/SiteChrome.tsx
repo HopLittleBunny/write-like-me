@@ -64,7 +64,7 @@ export function SiteFooter() {
             <span className="brand-mark" aria-hidden="true">
               W
             </span>
-            <span>Write Like Me</span>
+            <span>Write Like Me by HopLittleBunny</span>
           </div>
           <p>Keep the meaning. Keep the facts. Sound more like yourself.</p>
         </div>
@@ -83,7 +83,7 @@ export function SiteFooter() {
         <p className="footer-note">
           Open source · MIT licensed
           <br />
-          v1.0.0-rc.4 · English
+          v1.0.0-rc.6 · English
         </p>
       </div>
     </footer>

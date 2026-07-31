@@ -12,6 +12,7 @@ Use this for first-run and multi-step interactions.
 - Never shame the user for using AI or for having rough writing.
 - Treat rough, spoken, and imperfect answers as useful evidence.
 - Give the user their draft or file before any optional follow-up.
+- For ordinary drafting and rewriting, return paste-ready prose without announcing the skill, describing the process, or adding a routine offer to revise it. Explain only when asked or when a material limitation needs attention.
 - Say plainly that personal writing-pattern analysis currently supports English. Do not turn this into a technical warning wall.
 - Follow the canonical long-dash authority order in [output contracts](output-contracts.md).
 
@@ -69,3 +70,5 @@ Ask only once. If the user prefers not to add more, create a Starter file and cl
 ## Continuity
 
 Explain once that `MY_WRITING_PATTERN.md` is the portable memory. The user can attach it to a new task with the draft they want written. Do not claim background memory or automatic syncing.
+
+On local agent hosts, use `~/.write-like-me/MY_WRITING_PATTERN.md` when it already exists or after the user agrees to save a profile there. Do not imply that ChatGPT or another web host can see that local path, and do not store raw writing samples by default.

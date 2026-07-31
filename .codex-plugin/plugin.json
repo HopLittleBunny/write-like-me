@@ -1,7 +1,7 @@
 {
   "name": "write-like-me",
-  "version": "1.0.0-rc.4+codex.20260729151118",
-  "description": "Remove generic AI texture, learn an evidence-based writing pattern, and rewrite in the user's voice while preserving meaning.",
+  "version": "1.0.0-rc.6+codex.20260731100340",
+  "description": "Write, rewrite, or reply in the user's evidence-backed voice while preserving meaning and removing generic AI texture.",
   "author": {
     "name": "Amit Sharma",
     "url": "https://github.com/HopLittleBunny"
@@ -20,9 +20,9 @@
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "Write Like Me",
-    "shortDescription": "Remove AI texture. Keep and learn your voice.",
-    "longDescription": "Write Like Me uses semantic safeguards and applied linguistic evidence to audit generic AI texture, preserve the draft's real voice, build a portable English writing pattern, verify rewrite integrity, and learn only corrections the user confirms.",
+    "displayName": "Write Like Me — Voice Pattern",
+    "shortDescription": "Keep the meaning. Learn your evidence-backed voice.",
+    "longDescription": "Write Like Me by HopLittleBunny drafts or rewrites personal prose, uses semantic safeguards and applied linguistic evidence to preserve meaning and language variety, builds a portable English writing pattern, verifies rewrite integrity, and learns only corrections the user confirms.",
     "developerName": "Amit Sharma",
     "category": "Productivity",
     "capabilities": [
@@ -31,13 +31,15 @@
       "Detect"
     ],
     "defaultPrompt": [
+      "Write this email in my voice and keep it paste-ready.",
       "Audit or clean the AI texture in this draft.",
-      "Learn my writing pattern from a few answers.",
-      "Make this draft sound more like me."
+      "Learn my writing pattern from a few answers."
     ],
-    "websiteURL": "https://github.com/HopLittleBunny/write-like-me",
+    "websiteURL": "https://hoplittlebunny.github.io/write-like-me/",
     "privacyPolicyURL": "https://github.com/HopLittleBunny/write-like-me/blob/main/PRIVACY.md",
     "termsOfServiceURL": "https://github.com/HopLittleBunny/write-like-me/blob/main/TERMS.md",
-    "brandColor": "#6657E8"
+    "brandColor": "#0F3031",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "logo": "./.codex-plugin/assets/logo.png"
   }
 }
