@@ -1,0 +1,55 @@
+name: Bug report
+description: Report a reproducible problem using synthetic or redacted material.
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve Write Like Me. Do not post private drafts, writing profiles, credentials or personal diagnostic output. Use a synthetic example whenever possible.
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: The release or commit you tested.
+      placeholder: 1.0.0-rc.7 or commit SHA
+    validations:
+      required: true
+  - type: dropdown
+    id: host
+    attributes:
+      label: Host
+      options:
+        - ChatGPT
+        - Codex
+        - Claude
+        - Local agent
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Provide the smallest safe reproduction. Replace real names, organisations and facts.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy check
+      options:
+        - label: I have removed private writing, personal data, credentials and confidential material.
+          required: true

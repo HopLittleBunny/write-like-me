@@ -2,13 +2,27 @@
 
 **Remove generic AI texture. Keep your meaning. Learn what actually sounds like you.**
 
-**Website:** [hoplittlebunny.github.io/write-like-me](https://hoplittlebunny.github.io/write-like-me/)
+**Use it now:** [Open Write Like Me in ChatGPT](https://chatgpt.com/plugins/plugins_6a69d210819081919ced6e297b365bb5)
 
-**Quick start:** [Try it in two minutes](https://hoplittlebunny.github.io/write-like-me/test/#quick-start)
+**Learn more:** [Website](https://hoplittlebunny.github.io/write-like-me/) · [Two-minute test](https://hoplittlebunny.github.io/write-like-me/test/#quick-start) · [rc7 release](https://github.com/HopLittleBunny/write-like-me/releases/tag/v1.0.0-rc.7) · [MIT License](LICENSE)
 
 Write Like Me is an open-source AI writing skill that combines semantic safeguards with applied linguistic evidence. It can clean or audit a one-off draft, learn a portable writing pattern from genuine samples or a few natural answers, rewrite new material in that pattern, and learn only the corrections the user explicitly confirms.
 
 It is not a banned-word list, a voice-cloning claim, an authorship detector, or an AI-detector bypass.
+
+## A 30-second example
+
+Synthetic source:
+
+> I wanted to check whether Friday still works. If not, Monday is fine, but I need to know before I book the room.
+
+A generic rewrite might add a warm-up, soften the deadline, or turn this into a polished “alignment” message. Write Like Me protects the actual conditions:
+
+> Does Friday still work? Monday is fine too, but please let me know before I book the room.
+
+That is the product in miniature: change the writing only as far as the supplied meaning and evidence allow. For a personal voice match, the skill first learns supported patterns from the user's own samples or answers.
+
+If that constraint is useful, **star the repository** to follow the open-source work. Issues, synthetic examples and careful contributions are welcome.
 
 ## The problem
 
@@ -130,6 +144,12 @@ The installer detects supported local agents, offers explicit `--agent` and `--a
 The plugin has no external backend and independently collects nothing. The selected AI host still processes the conversation under its own policies. Generated profiles and diagnostics remain user-controlled local files; raw writing is omitted from diagnostic JSON by default.
 
 Read the full [Privacy Policy](PRIVACY.md) and [Terms of Use](TERMS.md).
+
+## Transparency and security
+
+The complete runtime, prompts, references, scripts and tests are in this repository. Write Like Me has no hidden publisher API, account system, writing database or silent account memory. The selected AI host still processes the conversation under its own policies, and the optional website feedback form has a separately disclosed data path.
+
+Read [TRANSPARENCY.md](TRANSPARENCY.md), [SECURITY.md](SECURITY.md) and the [architecture](docs/ARCHITECTURE.md) for the exact boundaries. Never place private writing, credentials or personal profiles in a public issue.
 
 ## Validation status
 
