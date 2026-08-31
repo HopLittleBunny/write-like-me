@@ -4,12 +4,13 @@
 
 Write Like Me aims to improve specificity and personal fit without moving the user's meaning or manufacturing a personality.
 
-The system therefore treats writing as two related but separate layers:
+The system therefore treats writing as three related but separate layers:
 
 - **semantic content:** thesis, claims, polarity, entities, values, dates, quotations, caveats, modality, uncertainty, and source boundaries;
+- **authorial construction:** selection, disclosure, sequence, causality, agency, counterpressure, specific world contact, closure, and reader relationship;
 - **expression behaviour:** discourse order, stance, directness, cadence, syntax, paragraphing, vocabulary level, punctuation habits, contextual register, and evidenced language-variety features.
 
-A rewrite may change the second layer only while the first remains locked, unless the user explicitly authorises a substantive edit.
+A routine rewrite changes expression while semantic content remains locked. An authorised authorial pass may reorganise supported material, but it cannot invent the user's judgement, conflict, evidence, specificity or uncertainty.
 
 ## 2. Runtime topology
 
@@ -22,6 +23,7 @@ Plugin manifest
     ├── agents/openai.yaml
     ├── references/
     │   ├── conversation-contract.md
+    │   ├── authorial-decisions-contract.md
     │   ├── input-evidence-contract.md
     │   ├── voiceprint-architecture.md
     │   ├── language-variety-contract.md
@@ -40,7 +42,7 @@ Plugin manifest
 
 The router selects one of five workflows:
 
-1. **Clean or audit:** work from the current draft without asking for personal samples.
+1. **Clean or audit:** work from the current draft without asking for personal samples. Use the authorial-structure submode only when requested or when sentence-level work cannot resolve a central gap.
 2. **Learn a pattern:** build a portable profile from eligible evidence.
 3. **Write like me:** draft or rewrite personal prose from a brief, source draft, existing profile, or genuine samples.
 4. **Clean and learn:** provide immediate value, then collect evidence.
@@ -80,7 +82,15 @@ The model performs the contextual meaning review. `verify_rewrite.py` then check
 
 This verifier is intentionally conservative and incomplete. It can detect a missing price, changed modality class, conservative entity omission, or obvious autobiographical addition. It cannot prove total semantic equivalence.
 
-## 6. Contextual texture model
+## 6. Authorial decision boundary
+
+Surface fluency and personal authorship are not the same problem. When a user requests deeper re-authoring, the system creates a silent decision map covering selection, disclosure, sequence, causality and agency, counterpressure, specificity, closure, and reader relationship.
+
+Each questionable choice is classified as supported, reworkable, an authorial gap, or format-required. Supported and format-required choices stay. Reworkable choices can move within the meaning lock. A central authorial gap requires one focused question because the system cannot honestly decide what the writer believes, values, withholds, or leaves unresolved.
+
+This layer is not an inverse detector. The system never inserts time jumps, subplots, brands, ambiguity, direct address, rough grammar, or unresolved endings merely because a classifier associates them with human writing. Population research can suggest review questions but cannot become personal voice evidence.
+
+## 7. Contextual texture model
 
 The texture catalogue names recurring weak patterns but does not use a universal blacklist. Examples include colon reveals, trailing pseudo-analysis, importance inflation, vague authority, inflated verb phrases, precision theatre, synonym rotation, negative ladders, dramatic fragments, mechanical symmetry, manufactured profundity, and recap endings.
 
@@ -88,7 +98,7 @@ A pattern matters only when it creates a cost in context: vagueness, false autho
 
 Audit mode must quote evidence and recommend the minimum effective fix. It cannot score “humanness,” guess whether AI wrote the text, or rewrite without permission. Drafting and rewriting modes return paste-ready prose by default and omit routine answer-wrapper commentary.
 
-## 7. Evidence-aware personal pattern
+## 8. Evidence-aware personal pattern
 
 The personal profile uses feature-level reliability:
 
@@ -106,18 +116,22 @@ The current implementation supports English personal-pattern analysis. Draft cle
 
 Within English, regional variety, dialect, sociolect, and code-switching remain evidence-bound features. The system preserves them when supported by the current instruction, confirmed preferences, or eligible samples. It never inserts identity-associated features merely to perform a dialect.
 
-## 8. Candidate generation and selection
+Selection, disclosure, sequencing, counterpressure and closure require suitable complete pieces with reliable boundaries, or an explicit confirmed preference. Short onboarding answers, dictation, lightly edited AI output and population-level findings cannot establish them as personal traits.
+
+## 9. Candidate generation and selection
 
 Voice-aware rewriting produces two internal candidates:
 
 - **source-close:** minimal semantic and structural movement;
 - **voice-forward:** stronger application of reliable profile rules.
 
+For an authorised authorial pass, the second candidate may also reorganise supported material. It remains bound by the same semantic, factual, autobiographical and sample-leakage checks and cannot manufacture a decision to look human.
+
 Both undergo semantic review and deterministic verification. The system selects the candidate that improves personal fit with the least semantic movement. Users see one result unless they ask for alternatives.
 
 This design prevents “more voice” from automatically outranking accuracy.
 
-## 9. Deterministic verification
+## 10. Deterministic verification
 
 `verify_rewrite.py` checks bounded risks including:
 
@@ -130,7 +144,7 @@ This design prevents “more voice” from automatically outranking accuracy.
 
 Diagnostics store hashes and counts rather than raw draft text by default. An explicit flag is required to include source text.
 
-## 10. Portable correction learning
+## 11. Portable correction learning
 
 The continuity artifact is `MY_WRITING_PATTERN.md`. It is human-readable, editable, portable across hosts, and easy to delete.
 
@@ -144,7 +158,7 @@ When a user edits a generated draft, Write Like Me:
 
 At most twelve confirmed corrections are retained. A newer duplicate replaces the older entry. The system never claims silent learning.
 
-## 11. Privacy and threat model
+## 12. Privacy and threat model
 
 Primary risks are:
 
@@ -159,19 +173,20 @@ Controls include clear host-policy disclosure, untrusted-sample isolation, bound
 
 Because the host model still receives the user's supplied content, the no-server architecture reduces independent collection but does not remove the host's privacy considerations.
 
-## 12. Deliberate non-goals
+## 13. Deliberate non-goals
 
 Write Like Me does not:
 
 - prove who wrote a text;
 - guarantee detector evasion;
+- reverse classifier features to perform human authorship;
 - impersonate a third party;
 - infer stable identity from a small sample;
 - manufacture anecdotes or concrete details to appear human;
 - ban ordinary vocabulary or punctuation globally;
 - store a hidden account-level model of the user.
 
-## 13. Validation strategy
+## 14. Validation strategy
 
 The repository combines:
 
@@ -179,6 +194,7 @@ The repository combines:
 - activation scenarios for correct routing;
 - adversarial fixtures for provenance and instruction boundaries;
 - end-to-end scenario schemas;
+- authorial-boundary scenarios that test deep-pass permission, restraint on simple drafts, and detector-evasion reframing;
 - a blind comparison harness for preference testing;
 - package-content validation and checksums.
 

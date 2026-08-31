@@ -77,6 +77,19 @@ Keep a strong contrast when it earns its place. Remove repetition, not every rhe
 
 Preserve useful structure while restoring dependency between ideas and natural variation.
 
+### Structural defaults
+
+Use these only when the draft's underlying decisions, not merely its wording, weaken the piece. Read [authorial decisions contract](authorial-decisions-contract.md) before changing structure.
+
+- **Thematic over-determination:** the draft demonstrates an implication, states it, and then explains the lesson again instead of trusting the reader where the purpose allows inference.
+- **Single-track movement:** every paragraph advances one frictionless line, with no supplied uncertainty, counterpressure, competing cause, or meaningful dependency.
+- **Insight-resolution default:** a tension ends in personal understanding, acceptance, or a neat lesson even though the source does not support that resolution.
+- **Performed embodiment:** generic bodily sensations, sensory detail, or setting-as-emotion substitutes for a supported event, feeling, or consequence.
+- **Vague world contact:** diffuse references to books, research, culture, places, or experience replace a supplied named source or conceal that no source was provided.
+- **Unearned closure:** the ending resolves uncertainty, moral tension, or causality more completely than the evidence permits.
+
+Do not reverse these patterns mechanically. Do not add disorder, counterarguments, time jumps, brands, direct address, ambiguity, roughness, or an open ending merely to look less like AI writing.
+
 ### Performed humanity
 
 - unsupported `Let me be honest` or `I have been thinking a lot about`;
@@ -125,6 +138,7 @@ Keep process commentary outside the requested writing and omit it by default. Re
 - Preserve a deliberate rhetorical question, triad, or unusual word when it works.
 - Do not replace the user's natural irregularity with forced slang, fragments, or opinions.
 - Do not use a thesaurus to manufacture vocabulary diversity.
+- Do not manufacture structural diversity. A linear argument, explicit conclusion, or tidy resolution may be correct for the task.
 
 ## Second pass
 
@@ -136,7 +150,8 @@ After rewriting, check:
 4. Did one AI formula survive in several forms?
 5. Did the repair flatten the user's strongest wording?
 6. Does the ending belong to this argument?
+7. Did the writer make the central decisions, or did the edit merely disguise a generic structure?
 
 ## Influence and attribution
 
-The named-pattern audit and minimum-effective-edit emphasis were strengthened after reviewing Peter Yang's MIT-licensed [No AI Slop](https://github.com/petergyang/no-ai-slop) skill. Write Like Me independently expresses and contextualises these ideas, rejects blanket vocabulary bans, and adds its own evidence model, portable personal profile, correction learning, sample isolation, and deterministic rewrite verification.
+The named-pattern audit and minimum-effective-edit emphasis were strengthened after reviewing Peter Yang's MIT-licensed [No AI Slop](https://github.com/petergyang/no-ai-slop) skill. The distinction between surface texture and underlying authorial decisions was sharpened after reviewing Russell et al.'s [StoryScope](https://arxiv.org/abs/2604.03136) research on long-form fiction. Write Like Me independently expresses and contextualises these ideas, rejects blanket vocabulary and structural bans, and adds its own evidence model, portable personal profile, correction learning, sample isolation, and deterministic rewrite verification.

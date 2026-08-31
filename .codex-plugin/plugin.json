@@ -1,7 +1,7 @@
 {
   "name": "write-like-me",
-  "version": "1.0.0-rc.6+codex.20260731100340",
-  "description": "Write, rewrite, or reply in the user's evidence-backed voice while preserving meaning and removing generic AI texture.",
+  "version": "1.0.0-rc.7+codex.20260831154635",
+  "description": "Write, rewrite, or reply in the user's evidence-backed voice while preserving meaning, authorial decisions, and language variety.",
   "author": {
     "name": "Amit Sharma",
     "url": "https://github.com/HopLittleBunny"
@@ -22,7 +22,7 @@
   "interface": {
     "displayName": "Write Like Me — Voice Pattern",
     "shortDescription": "Keep the meaning. Learn your evidence-backed voice.",
-    "longDescription": "Write Like Me by HopLittleBunny drafts or rewrites personal prose, uses semantic safeguards and applied linguistic evidence to preserve meaning and language variety, builds a portable English writing pattern, verifies rewrite integrity, and learns only corrections the user confirms.",
+    "longDescription": "Write Like Me by HopLittleBunny drafts or rewrites personal prose, preserves meaning and language variety, removes generic AI texture, and can run a bounded authorial-structure pass without inventing judgement or gaming AI detectors. It builds a portable English writing pattern, verifies rewrite integrity, and learns only corrections the user confirms.",
     "developerName": "Amit Sharma",
     "category": "Productivity",
     "capabilities": [
@@ -32,7 +32,7 @@
     ],
     "defaultPrompt": [
       "Write this email in my voice and keep it paste-ready.",
-      "Audit or clean the AI texture in this draft.",
+      "Clean the AI texture, or rethink the structure without inventing my views.",
       "Learn my writing pattern from a few answers."
     ],
     "websiteURL": "https://hoplittlebunny.github.io/write-like-me/",

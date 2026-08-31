@@ -21,7 +21,7 @@ class PackageContractTests(unittest.TestCase):
     def test_manifest_contract(self):
         manifest = json.loads((PLUGIN_ROOT / ".codex-plugin" / "plugin.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["name"], "write-like-me")
-        self.assertRegex(manifest["version"], r"^1\.0\.0-rc\.6\+codex\.[0-9]{14}$")
+        self.assertRegex(manifest["version"], r"^1\.0\.0-rc\.7\+codex\.[0-9]{14}$")
         self.assertEqual(manifest["license"], "MIT")
         self.assertEqual(manifest["repository"], "https://github.com/HopLittleBunny/write-like-me")
         self.assertEqual(manifest["interface"]["displayName"], "Write Like Me — Voice Pattern")
@@ -57,6 +57,8 @@ class PackageContractTests(unittest.TestCase):
         self.assertIn("minimum effective edit", skill)
         self.assertIn("paste-ready", skill)
         self.assertIn("language variety contract", skill)
+        self.assertIn("authorial decisions contract", skill)
+        self.assertIn("Never manufacture them merely to invert an AI-writing pattern", skill)
         self.assertIn("unobserved dialect markers", skill)
         self.assertIn("scripts/verify_rewrite.py", skill)
         self.assertIn("scripts/update_writing_pattern.py", skill)
@@ -67,10 +69,14 @@ class PackageContractTests(unittest.TestCase):
         self.assertIn("allow_implicit_invocation: true", agent)
         catalogue = (SKILL_ROOT / "references" / "ai-texture-catalogue.md").read_text(encoding="utf-8")
         output_contracts = (SKILL_ROOT / "references" / "output-contracts.md").read_text(encoding="utf-8")
+        authorial_contract = (SKILL_ROOT / "references" / "authorial-decisions-contract.md").read_text(encoding="utf-8")
         self.assertIn("No ordinary word, punctuation mark, sentence shape, or rhetorical move is banned outright", catalogue)
         self.assertIn("Peter Yang", catalogue)
         self.assertIn("explicit current instruction, confirmed preference, Observed reliable writing evidence", output_contracts)
         self.assertIn("Nothing becomes Observed below the Emerging floor", output_contracts)
+        self.assertIn("This is an authoring aid, not an AI detector or detector-evasion recipe", authorial_contract)
+        self.assertIn("may not invent the writer's judgement", authorial_contract)
+        self.assertIn("not from performing the inverse of a classifier", authorial_contract)
 
     def test_required_references_and_no_placeholders(self):
         required = {
@@ -81,6 +87,7 @@ class PackageContractTests(unittest.TestCase):
             "voiceprint-architecture.md",
             "input-evidence-contract.md",
             "language-variety-contract.md",
+            "authorial-decisions-contract.md",
         }
         found = {path.name for path in (SKILL_ROOT / "references").glob("*.md")}
         self.assertTrue(required.issubset(found))

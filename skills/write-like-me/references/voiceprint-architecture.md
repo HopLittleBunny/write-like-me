@@ -4,17 +4,18 @@ Keep the user experience simple while using a disciplined evidence model underne
 
 ## Core thesis
 
-Voice is not a tone label or one fixed vector. It is a conditional writing pattern shaped by meaning, judgement, audience, purpose, medium, topic, relationship, and time.
+Voice is not a tone label or one fixed vector. It is a conditional writing pattern shaped by meaning, judgement, authorial choice, audience, purpose, medium, topic, relationship, and time.
 
-Model the task as seven separate layers.
+Model the task as eight separate layers.
 
 1. Semantic intent: thesis, claims, polarity, modality, entities, numbers, dates, quotes, caveats, and source boundaries.
 2. Author judgement: what the writer notices, how strongly they claim, what earns certainty, and what they refuse to overstate.
-3. Rhetorical movement: how the writer opens, develops, contrasts, concedes, explains, exemplifies, and lands.
-4. Surface realization: sentence and paragraph rhythm, syntax, fragments, contractions, punctuation, function words, vocabulary, and evidenced language-variety features.
-5. Register and mode: audience, purpose, medium, relationship, domain, and length.
-6. Factual and autobiographical memory: what the model is allowed to state about the person.
-7. Negative preference: rejected phrases, moves, tones, claims, and platform habits.
+3. Authorial construction: what the writer selects, leaves implicit, sequences, connects causally, complicates, resolves, or leaves open.
+4. Rhetorical movement: how the writer opens, develops, contrasts, concedes, explains, exemplifies, and lands.
+5. Surface realization: sentence and paragraph rhythm, syntax, fragments, contractions, punctuation, function words, vocabulary, and evidenced language-variety features.
+6. Register and mode: audience, purpose, medium, relationship, domain, and length.
+7. Factual and autobiographical memory: what the model is allowed to state about the person.
+8. Negative preference: rejected phrases, moves, tones, claims, and platform habits.
 
 Never collapse these into one `sounds like you` score.
 
@@ -24,7 +25,15 @@ Let the language model write prose. Use deterministic analysis to measure, const
 
 Do not use deterministic repair rules to inject a sharp judgement, belief shift, personal opinion, or anecdote. VoicePrint's earlier rhythm-repair experiments showed why this is dangerous: a repair can sound human while inventing the writer's thought.
 
-For a meaningful rewrite, produce two internal bounded candidates: source-close and voice-forward. Run the same release gates on both and choose the smallest semantic movement that gives a useful voice improvement. Candidate generation is not a licence to broaden the claim.
+For a meaningful rewrite, produce two internal bounded candidates: source-close and voice-forward. In an authorised authorial-structure pass, the second candidate may reorganise supported material. Run the same release gates on both and choose the smallest semantic movement that gives a useful improvement. Candidate generation is not a licence to broaden the claim or invent the writer's decision.
+
+## Authorial decision rule
+
+Surface fluency can hide generic choices about selection, disclosure, sequence, agency, counterpressure, specificity, and closure. Read [authorial decisions contract](authorial-decisions-contract.md) when the user requests a deep rewrite or says sentence-level cleanup still does not feel like theirs.
+
+Do not apply population-level human-versus-AI patterns as personal rules. A structural feature becomes personal evidence only when repeated across suitable complete pieces in the relevant context or explicitly confirmed by the user. Short onboarding answers and dictated transcripts cannot establish a stable preference for plot shape, argument architecture, implication, or closure.
+
+Ordinary cleaning remains source-close. A material structural rewrite requires the user's requested depth, supported content, and an explanation when organisation changes. If a central judgement is missing, ask one focused question rather than generating a plausible human answer.
 
 ## Evidence model
 
@@ -67,6 +76,8 @@ The free starter file may measure:
 - recurring connectives, vocabulary, and cross-sample phrase shapes;
 - global AI-texture risks.
 
+Complete long-form samples may additionally support tentative authorial-construction evidence such as selection, implication, sequencing, counterpressure, and closure. Do not derive these features from short prompt answers merely because several sentences appear in one container.
+
 Present only signals with enough evidence. Keep unstable measurements inside diagnostics or label them Tentative.
 
 Character n-grams and raw phrase fingerprints can help compare texts, but do not place them in the portable file. They are easy for a model to copy and can leak topic. Translate safe evidence into behavioural instructions.
@@ -105,7 +116,7 @@ Use lightly edited AI output for preference or rejection evidence only. Do not a
 
 ## Feature-level evidence rule
 
-Overall Starter, Emerging, or Strong describes the profile evidence base. Sentence rhythm, paragraph rhythm, punctuation, openings, endings, discourse, stance, footing, connections, and register each retain their own support count, opportunity count, reliability source, scope, and evidence state.
+Overall Starter, Emerging, or Strong describes the profile evidence base. Authorial construction, sentence rhythm, paragraph rhythm, punctuation, openings, endings, discourse, stance, footing, connections, and register each retain their own support count, opportunity count, reliability source, scope, and evidence state.
 
 Expose only friendly labels to ordinary users. Keep the detailed evidence ledger in diagnostics.
 
@@ -138,7 +149,7 @@ User edits are preference evidence only after the user confirms the reusable rul
 
 Use deterministic checks for exact values, URLs, emails, quotations, modality, polarity, required entities, autobiographical additions, and distinctive style-sample phrase leakage. These checks fail closed on critical drift.
 
-Then complete a manual semantic review for thesis, causal logic, caveats, implied meaning, audience, format, and length. A passing deterministic report is necessary where tooling exists, but it is not proof of semantic equivalence.
+Then complete a manual semantic review for thesis, causal logic, caveats, implied meaning, authorial decisions, audience, format, and length. A passing deterministic report is necessary where tooling exists, but it is not proof of semantic equivalence.
 
 ## VoicePrint components carried forward
 
@@ -156,6 +167,7 @@ Then complete a manual semantic review for thesis, causal logic, caveats, implie
 ## Lessons carried forward from VoicePrint testing
 
 - A strong plain prompt is a real baseline. More machinery does not guarantee better writing.
+- Surface cleanup cannot substitute for the writer's missing judgement or structural decisions.
 - Model-judged quality is diagnostic, not proof that an author recognises themselves.
 - Human preference should be tested blind on unseen topics.
 - Style evidence must not leak old topics, nouns, examples, or distinctive phrases.
@@ -173,6 +185,7 @@ Use these ideas operationally without making the user learn the terminology:
 - discourse semantics for coherence, contrast, consequence, and landing;
 - pragmatics for stance, certainty, social relationship, implication, and omission;
 - rhetoric for openings, examples, judgement, sequence, and endings;
+- narratology and composition research for selection, disclosure, causality, temporal order, and closure in suitable long-form work;
 - preference learning for corrections, anti-samples, and blind choices;
 - retrieval research for selecting a small number of task-relevant examples instead of dumping a whole archive into the prompt.
 

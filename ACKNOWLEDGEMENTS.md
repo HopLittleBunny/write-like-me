@@ -17,3 +17,11 @@ Deepak Ganapathi's independently developed MIT-licensed [Write Like Me](https://
 Those ideas prompted us to improve our distribution and make language-variety protection explicit. Our installer and language-variety contract were implemented independently: the installer adds modified-file protection, timestamped restore points, path validation and no raw-sample storage, while the language contract requires evidence and forbids identity-based dialect performance.
 
 The projects share a name and broad category but have separate authors, repositories and architectures. No endorsement, partnership or collaboration by Deepak Ganapathi is implied.
+
+## Authorial-structure research
+
+Russell et al.'s [*StoryScope: Investigating idiosyncrasies in AI fiction*](https://arxiv.org/abs/2604.03136) helped sharpen one product distinction: changing surface language is not the same as making the underlying choices that give a piece its direction, causality and closure.
+
+Write Like Me carries forward that bounded lesson as an authoring workflow. It does not use the StoryScope classifier, treat the paper's fiction findings as universal writing rules, infer human authorship from structural features, or optimise prose to evade detection. The authorial-decisions contract was implemented independently.
+
+No endorsement, partnership or collaboration by the StoryScope authors, the University of Maryland, Google DeepMind or DeepSeek is implied.
