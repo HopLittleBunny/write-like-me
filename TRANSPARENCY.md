@@ -58,6 +58,13 @@ zero open alerts. GitHub secret scanning, push protection and Dependabot
 security updates were enabled. Broader non-provider and validity checks were
 not reported as enabled by GitHub for this repository.
 
+The same review found 22 open Dependabot alerts against the default branch,
+all in the website dependency tree. The storefront branch updates Next.js from
+16.2.6 to 16.3.3 and refreshes affected transitive packages. After the update,
+`npm audit` reported zero known vulnerabilities and the lint, production build
+and static-export tests passed. GitHub will close matching alerts only after
+the change reaches the default branch and its advisory data is reprocessed.
+
 ## Changes
 
 Material product, privacy and security changes are recorded in Git history and
