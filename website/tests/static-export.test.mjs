@@ -19,13 +19,13 @@ test("exports the homepage, tester guide and both release packages", async () =>
   await Promise.all([
     access(
       new URL(
-        "../out/downloads/write-like-me-claude-skill-1.0.0-rc.6+codex.20260731100340.zip",
+        "../out/downloads/write-like-me-claude-skill-1.0.0-rc.7+codex.20260831154635.zip",
         import.meta.url,
       ),
     ),
     access(
       new URL(
-        "../out/downloads/write-like-me-openai-plugin-1.0.0-rc.6+codex.20260731100340.zip",
+        "../out/downloads/write-like-me-openai-plugin-1.0.0-rc.7+codex.20260831154635.zip",
         import.meta.url,
       ),
     ),

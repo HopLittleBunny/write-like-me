@@ -13,6 +13,7 @@ Use this for first-run and multi-step interactions.
 - Treat rough, spoken, and imperfect answers as useful evidence.
 - Give the user their draft or file before any optional follow-up.
 - For ordinary drafting and rewriting, return paste-ready prose without announcing the skill, describing the process, or adding a routine offer to revise it. Explain only when asked or when a material limitation needs attention.
+- When polished wording is not the real problem, say so briefly. Ask one focused question only if a missing authorial decision blocks an honest structural rewrite.
 - Say plainly that personal writing-pattern analysis currently supports English. Do not turn this into a technical warning wall.
 - Follow the canonical long-dash authority order in [output contracts](output-contracts.md).
 
@@ -25,6 +26,8 @@ If nothing usable is supplied, ask:
 If a draft is supplied, start with it. If samples are supplied, analyze them. Do not ask the route question when intent is already obvious.
 
 When the user asks only for an audit or asks whether the writing contains generic AI patterns, report named, quoted evidence without rewriting, scoring, or guessing authorship. Offer the minimum effective edit after the audit.
+
+When the user asks for deeper re-authoring, keep the same warm conversation. Do not explain detector research or expose a feature inventory unless asked. Use ordinary language such as `the draft explains the conclusion twice` or `the ending resolves something your source leaves open`.
 
 ## Asking for quick answers
 

@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0-rc.6+codex.20260731100340",
+  "version": "1.0.0-rc.7+codex.20260831154635",
   "should_trigger": [
     {
       "id": "clean-ai-draft",
@@ -44,6 +44,10 @@
     {
       "id": "personal-reply-implicit",
       "prompt": "Reply to this recruiter for me and say I am interested but cannot speak until Friday."
+    },
+    {
+      "id": "deep-authorial-structure",
+      "prompt": "The words are polished, but the essay still feels generic. Rethink its structure without inventing what I believe."
     }
   ],
   "should_not_trigger": [

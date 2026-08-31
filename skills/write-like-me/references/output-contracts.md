@@ -21,6 +21,16 @@ Do not lead with a long diagnosis. If a central paragraph is hollow or unsupport
 
 Make the minimum effective edit. Leave strong sentences alone, preserve the draft's useful irregularity, and do not enforce a rule merely because its pattern name appears once. When structure changes materially, name the reason in `What changed`.
 
+## Authorial-structure pass
+
+Use this only when the requested depth meets the trigger in [authorial decisions contract](authorial-decisions-contract.md). Standard cleanup does not silently become a structural rewrite.
+
+Preserve the meaning lock, then distinguish supported choices, reworkable structure, central authorial gaps, and format-required regularity. Reorder or compress supported material only when that solves a real problem in selection, implication, sequence, agency, counterpressure, specificity, closure, or reader relationship.
+
+If a central judgement is absent, ask one focused question in ordinary language. Do not answer it for the user. If the gap is peripheral, stay source-close or remove the disposable passage.
+
+Return the finished writing first when a complete result is possible. Add a compact `What changed` note after a material structural rewrite. Never report detector scores, claim human authorship, or describe a structural edit as detector evasion.
+
 ## Pattern audit
 
 Use this when the user asks to check, scan, audit, or detect generic AI writing without requesting a rewrite.
@@ -127,6 +137,10 @@ Evidence labels:
 
 - [Observed or Tentative instruction]
 
+### Authorial construction
+
+- [Preferred or Observed selection, implication, sequencing, counterpressure, or closure behaviour from suitable complete pieces; otherwise omit]
+
 ### Stance and judgement
 
 - [Observed or Tentative instruction]
@@ -186,18 +200,20 @@ These are product defaults, not claims about my personal style:
 - Avoid generic AI openings, corporate abstraction, repeated neat contrasts, fake vulnerability, and engagement bait.
 - Keep paragraph-led writing as paragraphs unless the task needs a list.
 - Do not make weak thinking look finished with headings or polish.
+- Question repeated explanations or tidy resolutions only when they weaken the current purpose. Do not manufacture disorder or ambiguity.
 
 ## Rewrite procedure
 
 1. Lock the meaning and factual boundaries.
 2. Identify purpose, audience, medium, and requested format.
-3. Apply confirmed and observed patterns before tentative ones.
-4. Draft naturally without copying sample wording.
-5. Check meaning and facts again.
-6. Check voice, rhythm, and generic AI texture.
-7. Compare a source-close and voice-forward candidate internally.
-8. Reject any candidate that fails deterministic or manual integrity checks.
-9. Make only the smallest necessary repair.
+3. Preserve the user's authorial decisions; ask when a central one is missing instead of inventing it.
+4. Apply confirmed and observed patterns before tentative ones.
+5. Draft naturally without copying sample wording.
+6. Check meaning and facts again.
+7. Check voice, authorial movement, rhythm, and generic AI texture.
+8. Compare a source-close and voice-forward candidate internally.
+9. Reject any candidate that fails deterministic or manual integrity checks.
+10. Make only the smallest necessary repair.
 
 ## Final self-check
 
@@ -207,6 +223,7 @@ These are product defaults, not claims about my personal style:
 - Does the writing fit the current audience and purpose?
 - Did the result preserve only paragraph and sentence movement supported by this file?
 - Is any personal rule being exaggerated into a mannerism?
+- Did the rewrite invent judgement, conflict, specificity, ambiguity, or disorder merely to appear human?
 - Does long-dash use follow the authority order instead of a blanket rule?
 
 ## Prompt to use

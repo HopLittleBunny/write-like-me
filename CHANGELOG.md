@@ -1,5 +1,18 @@
 # Write Like Me changelog
 
+## 1.0.0-rc.7
+
+This release candidate adds a bounded authorial-decisions pass for drafts whose words are clean but whose underlying choices still feel generic.
+
+- Added an authorial-decisions contract covering selection, disclosure, sequence, agency, counterpressure, specificity, closure, and reader relationship.
+- Kept ordinary cleaning small: short factual writing does not become a structural exercise unless the user asks or a central authorial gap blocks an honest result.
+- Allowed an authorised second candidate to reorganise supported material while forbidding invented judgement, conflict, detail, ambiguity, sources, or structural irregularity.
+- Added contextual structural-default checks for over-explained themes, single-track movement, vague world contact, performed embodiment, and unearned insight endings.
+- Explicitly prohibited AI-detector optimisation and mechanical inversion of classifier features.
+- Limited structural pattern learning to suitable complete pieces or explicit preferences; onboarding answers, dictation, lightly edited AI output, and population research do not become personal evidence.
+- Added regression scenarios for deep re-authoring, simple-email restraint, and detector-evasion reframing.
+- Documented the bounded product lesson drawn from StoryScope while preserving the paper's fiction-specific scope.
+
 ## 1.0.0-rc.6
 
 This release candidate improves first-use writing quality and prepares safe local-agent distribution.

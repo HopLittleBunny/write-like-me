@@ -14,11 +14,12 @@ It is not a banned-word list, a voice-cloning claim, an authorship detector, or 
 
 Most “humanizers” work at the surface. They swap fashionable words, add contractions, break sentences into punchy fragments, or impose somebody else's idea of casual writing. The result may look less polished while saying something subtly different or sounding like a different generic persona.
 
-Write Like Me separates three jobs:
+Write Like Me separates four jobs:
 
 1. **Meaning:** what must remain true.
-2. **Texture:** which generic model habits weaken this particular draft.
-3. **Voice:** which behavioural patterns are actually supported by the user's writing.
+2. **Authorial decisions:** what the writer selects, orders, implies, resolves, or leaves open.
+3. **Texture:** which generic model habits weaken this particular draft.
+4. **Voice:** which behavioural patterns are actually supported by the user's writing.
 
 That separation is the core product.
 
@@ -26,6 +27,7 @@ That separation is the core product.
 
 - **Pattern audit:** quotes affected lines, names contextual AI-texture risks, and suggests the smallest fix without rewriting or guessing authorship.
 - **Draft cleaning:** removes generic framing, hollow abstraction, mechanical symmetry, fake profundity, and other weak patterns while preserving strong human sentences.
+- **Authorial-structure pass:** when explicitly needed, reworks selection, disclosure, sequence, agency, counterpressure, specificity or closure using only supplied choices. It does not invent judgement or game AI detectors.
 - **Writing-pattern learning:** measures supported tendencies from genuine writing, typed answers, or dictation and records evidence quality instead of pretending certainty.
 - **Voice-aware rewriting:** transfers rhythm, stance, explanation order, paragraphing, and reliable surface habits without copying old topics, anecdotes, names, or distinctive phrases.
 - **Language-variety protection:** preserves evidenced regional English, dialect and code-switching without manufacturing identity-based mannerisms.
@@ -60,12 +62,14 @@ These are behavioural observations, not identity biometrics. Signals are labelle
 flowchart LR
     A["Draft, samples or answers"] --> B["Input and trust boundary"]
     B --> C["Semantic meaning lock"]
-    B --> D["Contextual texture audit"]
-    B --> E["Evidence-aware voice model"]
+    B --> D["Authorial decision map"]
+    B --> E["Contextual texture audit"]
+    B --> L["Evidence-aware voice model"]
     C --> F["Source-close candidate"]
-    D --> F
+    E --> F
     C --> G["Voice-forward candidate"]
-    E --> G
+    D --> G
+    L --> G
     F --> H["Deterministic rewrite verifier"]
     G --> H
     H --> I["Smallest safe final edit"]
@@ -76,7 +80,7 @@ flowchart LR
 The runtime is deliberately small:
 
 - `SKILL.md` routes the user request and enforces the product contract.
-- `references/` contains the contextual texture catalogue, evidence model, conversation contract, architecture, question bank, and output contracts.
+- `references/` contains the authorial-decisions contract, contextual texture catalogue, evidence model, conversation contract, architecture, question bank, and output contracts.
 - `build_starter_voice_file.py` creates an evidence-labelled portable profile.
 - `verify_rewrite.py` blocks selected semantic regressions and style-sample leakage.
 - `update_writing_pattern.py` records confirmed corrections without storing draft text.
@@ -94,6 +98,8 @@ Try one of these:
 > I do not have samples. Ask me two or three natural questions and build a starter writing pattern from my answers.
 
 > Use my attached `MY_WRITING_PATTERN.md` to rewrite this new draft. Preserve every fact and do not invent personal experience.
+
+> The wording is polished, but the structure still feels generic. Rethink it using only the decisions and evidence I supplied. Do not invent a stronger opinion.
 
 ## Install
 
@@ -138,6 +144,12 @@ Peter Yang's open-source [No AI Slop](https://github.com/petergyang/no-ai-slop) 
 Write Like Me adds a different layer: evidence-aware personal patterns, provenance and confidence controls, correction learning, untrusted-sample isolation, and deterministic rewrite verification. It uses contextual judgement rather than banning ordinary words or constructions outright.
 
 See [ACKNOWLEDGEMENTS.md](ACKNOWLEDGEMENTS.md). No endorsement or collaboration is implied.
+
+## What we learned from StoryScope
+
+[*StoryScope*](https://arxiv.org/abs/2604.03136) showed why surface substitutions are an incomplete response to generic AI writing in its long-form fiction setting. The useful product lesson is not a list of features to invert. It is that the writer's choices about selection, sequence, agency, implication and closure have to come from the writer.
+
+Rc7 turns that lesson into an optional authorial pass with strict evidence and meaning boundaries. It does not include an AI detector or promise detector evasion, and it does not generalise fiction findings into blanket rules for every format.
 
 ## Contributing
 

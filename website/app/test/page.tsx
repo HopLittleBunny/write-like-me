@@ -10,10 +10,10 @@ export const metadata: Metadata = {
 };
 
 const claudeDownload = withBasePath(
-  "/downloads/write-like-me-claude-skill-1.0.0-rc.6+codex.20260731100340.zip",
+  "/downloads/write-like-me-claude-skill-1.0.0-rc.7+codex.20260831154635.zip",
 );
 const openaiDownload = withBasePath(
-  "/downloads/write-like-me-openai-plugin-1.0.0-rc.6+codex.20260731100340.zip",
+  "/downloads/write-like-me-openai-plugin-1.0.0-rc.7+codex.20260831154635.zip",
 );
 
 export default function TesterGuide() {
