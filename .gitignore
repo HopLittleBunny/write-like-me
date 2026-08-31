@@ -4,6 +4,14 @@ __pycache__/
 .pytest_cache/
 .coverage
 
+# Local credentials and environment files.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials*.json
+
 dist/
 release/
 *.zip

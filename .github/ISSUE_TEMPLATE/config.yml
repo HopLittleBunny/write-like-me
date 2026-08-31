@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Sensitive security or privacy report
+    url: https://github.com/HopLittleBunny/write-like-me/security/advisories/new
+    about: Report vulnerabilities privately. Do not include sensitive material in a public issue.
+  - name: Try Write Like Me
+    url: https://hoplittlebunny.github.io/write-like-me/test/#quick-start
+    about: Run the two-minute public test before opening a usage question.

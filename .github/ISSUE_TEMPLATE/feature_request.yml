@@ -1,0 +1,33 @@
+name: Feature request
+description: Propose an improvement with a concrete user problem and evidence boundary.
+title: "[Feature]: "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: User problem
+      description: What is difficult today, and for whom?
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome
+      description: Describe the result without prescribing implementation.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Safe example or evidence
+      description: Use synthetic or redacted text only.
+  - type: checkboxes
+    id: boundaries
+    attributes:
+      label: Product boundaries
+      options:
+        - label: This request does not depend on guessing authorship or evading an AI detector.
+          required: true
+        - label: I have not included private writing or personal information.
+          required: true
